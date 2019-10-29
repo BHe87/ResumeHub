@@ -48,7 +48,9 @@ On Windows:
 ```
 
 Run Flask:
+```
 python -m flask run
+```
 
 
 To stop Flask:
