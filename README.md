@@ -20,20 +20,9 @@ On Windows:
 ```
 
 
-Activate a virtual enviornment:
+To activate a virtual enviornment:
 ```
 $ . venv/bin/activate
-```
-
-On Windows:
-```
-> TODO
-```
-
-
-Deactivate the virtual enviornment:
-```
-$ deactivate
 ```
 
 On Windows:
@@ -58,11 +47,22 @@ On Windows:
 > set FLASK_APP=main.py
 ```
 
-To run Flask:
+Run Flask:
 python -m flask run
 
 
 To stop Flask:
 ```
 CTRL+C
+```
+
+
+To deactivate the virtual enviornment:
+```
+$ deactivate
+```
+
+On Windows:
+```
+> TODO
 ```
