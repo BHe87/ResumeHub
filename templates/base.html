@@ -1,3 +1,30 @@
+<!DOCTYPE html>
 <html>
+<script>
+{% block script %}
+{% endblock %}
+</script>
+<head>
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}">
+    <title>
+    {% block title %} Resume Hub {% endblock %}
+    </title>
+{% endblock %}
+</head>
+<body>
+{% block body %}
+    {% block header %}
+    <header>
+        <div class="topnav">
+            <a href="/">Home</a>
+            <div class="topnav-right">
+                <a href="#">Profile</a>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+{% endblock %}
+</body>
 </html>

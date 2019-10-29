@@ -1,3 +1,33 @@
-h1 {
-	font-family: Comic Sans, Comic-Sans MS;
+body {
+	font-family: 'Montserrat', monaco, sans-serif;
+	margin: 0;
+}
+
+.topnav {
+	background: #F08080;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+}
+
+.topnav a {
+	color: #ffffff;
+	float: left;
+	font-size: 20px;
+	padding: 14px 18px;
+	text-decoration: none;
+}
+
+.topnav a:hover {
+	background: #FFB6C1;
+	cursor: pointer;
+}
+
+/* the active/current link */
+.topnav a.active {
+	background: #FFB6C1;
+}
+
+.topnav-right {
+	float: right;
 }

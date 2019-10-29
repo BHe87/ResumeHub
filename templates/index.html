@@ -1,10 +1,15 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
-<head>
-	<title> Resume Hub </title>
-</head>
+{% block title %} Resume Hub {% endblock %}
 
-<body>
+{% block head %}
+{{ super() }}
+{% endblock %}
 
-</body>
+{% block body %}
+	{% block header %}
+	{{ super() }}
+	{% endblock %}
+{% endblock %}
 </html>
