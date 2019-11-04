@@ -4,12 +4,6 @@ import enum
 db = SQLAlchemy()
 
 
-class User(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(24), nullable=False)
-	pw_hash = db.Column(db.String(64), nullable=False)
-
-
 class Year(enum.Enum):
     FRESHMAN = "Freshman"
     SOPHOMORE = "Sophomore"
