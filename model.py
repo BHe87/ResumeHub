@@ -21,6 +21,7 @@ class Gender(enum.Enum):
     MALE = "Male"
     FEMALE = "Female"
 
+
 organizations = db.Table('organizations',
                 db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
                 db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True)

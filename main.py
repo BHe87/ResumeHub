@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-from model import db, User, Student, Organization, Company
+from model import Company, db, Gender, Organization, Student, Year
 
 import os
 
@@ -23,7 +23,6 @@ def initdb_command():
 	# Drop the database and create the new one
 	db.drop_all()
 	db.create_all()
-
 	print('Initialized the database')
 
 
@@ -32,6 +31,8 @@ def root():
 	return render_template('index.html')
 
 
-@app.route('/upload_profile')
-def upload_profile():
-	return render_template('upload_profile.html')
+@app.route('/profile')
+def profile():
+	return render_template('profile.html',
+						   YEAR=Year,
+						   GENDER=Gender)

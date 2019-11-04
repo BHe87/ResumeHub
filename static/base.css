@@ -36,6 +36,45 @@ body {
 	padding: 10px;
 }
 
+.step {
+	border: 2px solid #1B94A6;
+	border-radius: 50px;
+	width: 800px;
+	margin: 40px auto;
+	padding: 25px;
+	height: auto;
+}
+
+.step2 * {
+	display: inline;
+}
+
+.step2 > input {
+	margin-left: 50px;
+}
+
+.step3 input {
+	border: 1px solid #1B94A6;
+	border-radius: 5px;
+	box-sizing: border-box;
+	height: 30px;
+	padding: 5px 10px;
+	width: 25%;
+}
+
+.step-title {
+	font-size: 23px;
+}
+
+.tidbits {
+	margin-top: 10px;
+}
+
+.tidbits * {
+	display: inline;
+	margin: 10px;
+}
+
 .button {
 	background-color: #1B94A6;
 	border: none;
@@ -56,7 +95,12 @@ body {
 	background-color: #21B3CA;
 }
 
+.save-container {
+	display: flex;
+}
+
 .save-profile {
 	height: 50px;
 	width: 400px;
+	margin: 0 auto;
 }

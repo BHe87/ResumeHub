@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+{% block title %} Upload Profile {% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block container %}
+<form>
+    <div class="step step1">
+        <div class="step-title">1. Join Organizations</div>
+    </div>
+    <div class="step step2">
+        <div class="step-title">2. Add Resume</div>
+        <input type="file" id="resume" name="resume">
+    </div>
+    <div class="step step3">
+        <div class="step-title">3. Tidbits</div>
+        <div class="tidbits">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Name"><br>
+            <label for="major">Major:</label>
+            <input type="text" id="major" placeholder="Computer Science">
+            <label for="minor">Minor:</label>
+            <input type="text" id="minor"><br>
+            <label for="grade">Grade:</label>
+            <select id="grade">
+                {% for x in YEAR %}
+                <option value={{ x.name }}>{{ x.value }}</option>
+                {% endfor %}
+            </select>
+            <label for="gender">Gender:</label>
+            <select id="gender">
+                {% for x in GENDER %}
+                <option value={{ x.name }}>{{ x.value }}</option>
+                {% endfor %}
+            </select>
+            <label for="gpa">GPA:</label>
+            <input type="text" id="gpa"><br>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" placeholder="123-456-6789"><br>
+        </div>
+    </div>
+    <div class="save-container">
+        <button class="button save-profile">Save Profile</button>
+    </div>
+</form>
+{% endblock %}
+</html>
