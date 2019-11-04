@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="static/styles/createAccount.css">
+</head>
+
+<body>
+  <div class="newAccountPage">
+    <div class="form">
+      <form class="newAccountForm" name="newAccountForm" id="newAccountForm" action="{{ url_for('register') }}">
+        Email Address
+        <input type="text" placeholder="email"/>
+        Username
+        <input type="text" name="username" placeholder="username"/>
+        Password
+        <input type="password" name="password" placeholder="password"/>
+        <br><b>Account Type</b><br>
+        Student
+        <input type="radio" name="accountType" id="student" value="student">
+        Student Organization
+        <input type="radio" name="accountType" id="studentOrganization" value="studentOrganization">
+        Company
+        <input type="radio" name="accountType" id="company" value="studentOrganization">
+        <br>
+        First Name
+        <input type="text" name="firstName" placeholder="First Name"/>
+        Last Name
+        <input type="text" name="lastName" placeholder="Last Name"/>
+        Organization Affliated With
+        <input type="text" name="organization" placeholder="Organization Name"/>
+        Year
+        <input type="text" name="year" placeholder="Year"/>
+        Major
+        <input type="text" name="major" placeholder="Major"/>
+        Minor
+        <input type="text" name="minor" placeholder="Minor"/>
+        <br><b>Gender</b><br>
+        Male
+        <input type="radio" name="gender" id="gender" value="Male">
+        Female
+        <input type="radio" name="gender" id="gender" value="Female">
+        Other
+        <input type="radio" name="gender" id="gender" value="Other">
+        Cumulative GPA
+        <input type="text" name="GPA" placeholder="Cumulative GPA"/>
+        Phone Number
+        <input type="text" name="phoneNumber" placeholder="Phone Number"/>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+  <script src="static/js/createAccount.js?v1.0"></script>
+</body>
+
+</html>
