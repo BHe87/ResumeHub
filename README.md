@@ -37,6 +37,12 @@ pip install Flask
 ```
 
 
+Install the SQLAlchemy Extension:
+```
+pip install Flask-SQLAlchemy
+```
+
+
 Set up an enviornment variable:
 ```
 $ export FLASK_APP=main.py
