@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block container %}
-<form>
+<form action="{{ url_for('save_profile') }}" method="post">
     <div class="step step1">
         <div class="step-title">1. Join Organizations</div>
     </div>
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="save-container">
-        <button class="button save-profile">Save Profile</button>
+        <input type="submit" class="button save-profile" value="Save Profile"></button>
     </div>
 </form>
 {% endblock %}

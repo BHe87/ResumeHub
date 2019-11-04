@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from model import Company, db, Gender, Organization, Student, Year
@@ -36,3 +36,9 @@ def profile():
 	return render_template('profile.html',
 						   YEAR=Year,
 						   GENDER=Gender)
+
+
+@app.route('/save_profile', methods=['POST'])
+def save_profile():
+	# TODO: Save tidbits accordingly
+	return redirect(url_for('profile'))
