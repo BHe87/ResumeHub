@@ -4,7 +4,7 @@ body {
 }
 
 .topnav {
-	background: #F08080;
+	background: #1B94A6;
 	overflow: hidden;
 	position: relative;
 	text-align: center;
@@ -19,15 +19,44 @@ body {
 }
 
 .topnav a:hover {
-	background: #FFB6C1;
+	background: #1B94A6;
 	cursor: pointer;
 }
 
 /* the active/current link */
 .topnav a.active {
-	background: #FFB6C1;
+	background: #1B94A6;
 }
 
 .topnav-right {
 	float: right;
+}
+
+.container {
+	padding: 10px;
+}
+
+.button {
+	background-color: #1B94A6;
+	border: none;
+	border-radius: 30px;
+	color: #ffffff;
+	padding: 2px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.button:focus {
+	outline: none;
+}
+
+.button:hover {
+	background-color: #21B3CA;
+}
+
+.save-profile {
+	height: 50px;
+	width: 400px;
 }
