@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <script>
-{% block script %}
-{% endblock %}
+  {% block script %}
+  {% endblock %}
 </script>
+
 <head>
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}">
+  {% block head %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='fonts.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     <title>
-    {% block title %} Resume Hub {% endblock %}
+      {% block title %} Resume Hub {% endblock %}
     </title>
-{% endblock %}
+  {% endblock %}
 </head>
+
 <body>
-    <header>
-        <div class="topnav">
-            <a href="/">Home</a>
-            <div class="topnav-right">
-                <a href={{ url_for('profile') }}>Profile</a>
-            </div>
-        </div>
-    </header>
-    <div class="container">
+  <header>
+    <div class="topnav">
+      <a href="/">Home</a>
+      <div class="topnav-right">
+        <a href={{ url_for('profile') }}>Profile</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
     {% block container %}
     {% endblock %}
-    </div>
+  </div>
 </body>
+
 </html>

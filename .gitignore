@@ -1,0 +1,5 @@
+.vscode
+venv/
+resumehub.db
+__pycache__
+.DS_store
