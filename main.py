@@ -5,3 +5,8 @@ app = Flask(__name__)
 @app.route('/')
 def root():
 	return render_template('index.html')
+
+
+@app.route('/upload_profile')
+def upload_profile():
+	return render_template('upload_profile.html')

@@ -14,8 +14,6 @@
 {% endblock %}
 </head>
 <body>
-{% block body %}
-    {% block header %}
     <header>
         <div class="topnav">
             <a href="/">Home</a>
@@ -24,7 +22,9 @@
             </div>
         </div>
     </header>
+    <div class="container">
+    {% block container %}
     {% endblock %}
-{% endblock %}
+    </div>
 </body>
 </html>
