@@ -53,7 +53,14 @@ On Windows:
 > set FLASK_APP=main.py
 ```
 
-Run Flask:
+
+Initialize database:
+```
+flask initdb
+```
+
+
+To run Flask:
 ```
 python -m flask run
 ```
