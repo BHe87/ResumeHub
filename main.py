@@ -119,36 +119,24 @@ def home():
 def profile():
 
 	# Check if user is not logged in. SKIP FOR NOW
-	#if not g.user:
-	#	return redirect(url_for('login'))
+	if not g.user:
+		return redirect(url_for('login'))
 
-	# FOR TESTING 
-	# TODO Take out hardcoded test, and use real user profile
-	stud = Student()
-	stud.first_name = "LOL"
-	stud.last_name = "GG"
-	stud.gpa = 5.0
+	# Retrieve the student account - Am i sending the password hash?? lol
+	student = Student.query.filter_by(username=User.username).first()
 
 	return render_template('profile.html',
-						   STUDENT=stud,
+						   STUDENT=student,
 						   YEAR=Year,
 						   GENDER=Gender)
 
 
 @app.route('/save_profile', methods=['POST'])
 def save_profile():
-	# TODO: Save tidbits accordingly
-	# Check if logged in - doesn't currently work
-	student = None
+	if not g.user:
+		return redirect(url_for('login'))
 
-	# if not g.user:
-	# 	return redirect(url_for('login'))
-	# else:
-
-	# TODO Use real user account instead of Hardcoded student 
-	student = Student() #User.query.filter_by(username=User.username).first() # Not sure if this is correct
-	student.first_name = "Hey"
-	print(student.first_name)
+	student = Student.query.filter_by(username=User.username).first() # Not sure if this is correct
 
 	if student == None:
 		print("Error: Student in NULL when saving profile", flush=True)
@@ -212,6 +200,10 @@ def save_profile():
 		print("Warning: {}\n".format(warn))
 		print("Updating profile...")
 
+		# Save to database
+		db.session.commit()
 
+	# TODO redirect to appropriate success or fail screens
+	
 	print("Ayy got it boss")
 	return redirect(url_for('profile'))

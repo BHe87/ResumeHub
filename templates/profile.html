@@ -20,13 +20,13 @@
         <div class="step-title">3. Tidbits</div>
         <div class="tidbits">
             <label for="name">First:</label>
-            <input type="text" name="first-name" id="name" placeholder="First Name" value={{ STUDENT.first_name }}>
+            <input type="text" name="first-name" id="name" placeholder="First Name" value="{{ STUDENT.first_name }}">
             <label for="name">Last:</label>
-            <input type="text" name="last-name" id="name" placeholder="Name" value={{ STUDENT.last_name }}><br>
+            <input type="text" name="last-name" id="name" placeholder="Name" value="{{ STUDENT.last_name }}""><br>
             <label for="major">Major:</label>
-            <input type="text" name="major" id="major" placeholder="Computer Science" value={{ STUDENT.major }}>
+            <input type="text" name="major" id="major" placeholder="Computer Science" value="{{ STUDENT.major }}">
             <label for="minor">Minor:</label>
-            <input type="text" name="minor" id="minor" value={{ STUDENT.minor }}><br>
+            <input type="text" name="minor" id="minor" value="{{ STUDENT.minor }}"><br>
             <label for="grade">Grade:</label>
             <select id="grade" name="grade">
                 {% for x in YEAR %}
@@ -40,9 +40,9 @@
                 {% endfor %}
             </select>
             <label for="gpa">GPA:</label>
-            <input type="text" name="gpa" id="gpa" value={{ STUDENT.gpa }}><br>
+            <input type="text" name="gpa" id="gpa" value="{{ STUDENT.gpa }}"><br>
             <label for="phone">Phone Number:</label>
-            <input type="text" name="phone" id="phone" placeholder="123-456-6789" value={{ STUDENT.phone }}><br>
+            <input type="text" name="phone" id="phone" placeholder="123-456-6789" value="{{ STUDENT.phone }}"><br>
         </div>
     </div>
     <div class="save-container">
