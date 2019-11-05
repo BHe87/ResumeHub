@@ -7,38 +7,48 @@
 <body>
   <div class="newAccountPage">
     <div class="form">
-      <form class="newAccountForm" name="newAccountForm" id="newAccountForm" action="{{ url_for('register') }}">
+      {% if error %}
+      <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+      <form class="newAccountForm" name="newAccountForm" id="newAccountForm" method="post" action="{{ url_for('register') }}">
         Username
         <input type="text" name="username" placeholder="username"/>
         Password
         <input type="password" name="password" placeholder="password"/>
+        Re-enter Password
+        <input type="password" name="password2" placeholder="password"/>
         Email Address
         <input type="text" name="email" placeholder="email"/>
         <br><b>Account Type</b><br>
-        Student
-        <input type="radio" name="accountType" id="student" value="student">
+        Student (MUST CHOOSE THIS FOR THIS MILESTONE)
+        <input type="radio" name="accountType" id="student" value="Student">
         Student Organization
-        <input type="radio" name="accountType" id="studentOrganization" value="studentOrganization">
+        <input type="radio" name="accountType" id="studentOrganization" value="Organization">
         Company
-        <input type="radio" name="accountType" id="company" value="studentOrganization">
+        <input type="radio" name="accountType" id="company" value="Company">
         <br>
         First Name
         <input type="text" name="firstName" placeholder="First Name"/>
         Last Name
         <input type="text" name="lastName" placeholder="Last Name"/>
-        Organization Affliated With
-        <input type="text" name="organization" placeholder="Organization Name"/>
-        Year
-        <input type="text" name="year" placeholder="Year"/>
+        <!-- TODO: do we need this when registering? -->
+        <!-- Organization Affliated With
+        <input type="text" name="organization" placeholder="Organization Name"/> -->
+        Grade
+        <select name="grade" id="grade">
+            {% for x in YEAR %}
+            <option value={{ x.name }}>{{ x.value }}</option>
+            {% endfor %}
+        </select>
+        <br>
         Major
         <input type="text" name="major" placeholder="Major"/>
         Minor
         <input type="text" name="minor" placeholder="Minor"/>
         <br><b>Gender</b><br>
-        Male
-        <input type="radio" name="gender" id="gender" value="Male">
-        Female
-        <input type="radio" name="gender" id="gender" value="Female">
+        {% for x in GENDER %}
+          {{ x.value }}<input type="radio" name="gender" id="gender" value={{ x.name }}>
+        {% endfor %}
         Other
         <input type="radio" name="gender" id="gender" value="Other">
         Cumulative GPA
