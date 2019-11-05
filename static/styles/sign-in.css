@@ -1,7 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 .login-page {
-  width: 360px;
+  width: 480px;
   padding: 8% 0 0;
   margin: auto;
 }
@@ -9,14 +7,15 @@
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 360px;
+  max-width: 480px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
-  font-family: "Roboto", sans-serif;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -27,10 +26,11 @@
   font-size: 14px;
 }
 .form button {
-  font-family: "Roboto", sans-serif;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
   text-transform: uppercase;
   outline: 0;
-  background: #0000FF;
+  background: #2CB2B8;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #5FD7DD;
 }
 .form .message {
   margin: 15px 0 0;
@@ -85,9 +85,34 @@
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+.bg-svg {
+  background: url(../svg/signin-gb.svg) no-repeat top left;
+  background-size: 101vw;
+  background-position-x: -1vw;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bg-gradient {
+  background: linear-gradient(to left, #01848A, #5FD7DD);
+  height: 100vh;
+  width: 100vw;
+}  
+
 body {
-  background: linear-gradient(to left, #0000FF, #FFFFFF);
-  font-family: "Roboto", sans-serif;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+
+  margin: 0px;
+  padding: 0px;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
+}
+
+
+html {
+  margin: 0px;
+  padding: 0px;
 }
