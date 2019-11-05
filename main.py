@@ -117,7 +117,20 @@ def home():
 
 @app.route('/profile')
 def profile():
+
+	# Check if user is not logged in. SKIP FOR NOW
+	#if not g.user:
+	#	return redirect(url_for('login'))
+
+	# FOR TESTING 
+	# TODO Take out hardcoded test, and use real user profile
+	stud = Student()
+	stud.first_name = "LOL"
+	stud.last_name = "GG"
+	stud.gpa = 5.0
+
 	return render_template('profile.html',
+						   STUDENT=stud,
 						   YEAR=Year,
 						   GENDER=Gender)
 
@@ -125,4 +138,80 @@ def profile():
 @app.route('/save_profile', methods=['POST'])
 def save_profile():
 	# TODO: Save tidbits accordingly
+	# Check if logged in - doesn't currently work
+	student = None
+
+	# if not g.user:
+	# 	return redirect(url_for('login'))
+	# else:
+
+	# TODO Use real user account instead of Hardcoded student 
+	student = Student() #User.query.filter_by(username=User.username).first() # Not sure if this is correct
+	student.first_name = "Hey"
+	print(student.first_name)
+
+	if student == None:
+		print("Error: Student in NULL when saving profile", flush=True)
+
+	# Collect which fields we are missing
+	warn = ""
+
+	# Check we have stuff for each field
+	# Ideally we auto fill the info they already have?
+	if request.method == 'POST':
+		print("POST", flush=True)
+		for key in request.form.lists():
+			print(key)
+
+		if not request.form['resume']:
+			warn += "Missinng resume\n"
+		else:
+			print("Definitely adding the resume: {} ".format(request.form['resume']))
+			student.resume = request.form.getlist('resume')[0]
+
+		if not request.form['first-name']:
+			warn += "Missing name\n"
+		else:
+		 	student.first_name = request.form.getlist('first-name')[0] # just use first name for now lol
+
+		if not request.form['last-name']:
+			warn += "Missing name\n"
+		else:
+		 	student.first_name = request.form.getlist('last-name')[0] # just use first name for now lol
+
+		if not request.form['major']:
+			warn += "Missing major\n"
+		else:
+			student.major = request.form.getlist('major')[0]
+
+		if not request.form['minor']:
+			warn += "Missing minor\n"
+		else:
+			student.minor = request.form.getlist('minor')[0]
+
+		if not request.form['grade']:
+			warn += "Missing grade\n"
+		else:
+			student.year = request.form.getlist('grade')[0]
+
+		if not request.form['gender']:
+			warn += "Missing gender\n" # TRIGGER WARNING
+		else:
+			student.gender = request.form.getlist('gender')[0]
+
+		if not request.form['gpa']:
+			warn += "Missing GPA\n"
+		else:
+			student.gpa = request.form.getlist('gpa')[0]
+
+		if not request.form['phone']:
+			warn += "Missing phone number\n"
+		else:
+			student.phone = request.form.getlist('phone')[0]
+
+		print("Warning: {}\n".format(warn))
+		print("Updating profile...")
+
+
+	print("Ayy got it boss")
 	return redirect(url_for('profile'))
