@@ -50,7 +50,7 @@ def root():
 def login():
 	# if already logged in
 	if g.user:
-		return redirect(url_for('index'))
+		return redirect(url_for('root'))
 
 	error = None
 	if request.method == 'POST':
@@ -61,7 +61,7 @@ def login():
 			error = 'Invalid password'
 		else:
 			session['user_id'] = user.id
-			return redirect(url_for('index'))	
+			return redirect(url_for('root'))	
 	return render_template('login.html', error=error)
 
 

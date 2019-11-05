@@ -23,7 +23,7 @@ organizations = db.Table('organizations',
 
 
 class User(db.Model):
-    __abstract__ = True
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(24), nullable=False)
     pw_hash = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(320))
@@ -33,7 +33,7 @@ class User(db.Model):
 
 
 class Student(User):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     organizations = db.relationship('Organization', secondary=organizations, backref=db.backref('students'))
 
     # profile base attributes
@@ -47,10 +47,13 @@ class Student(User):
 
 
 class Organization(User):
-    id = db.Column(db.Integer, primary_key=True)
-    companies = db.relationship('Company', backref='organization', lazy=True)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+
+    # TODO: set up correct relationship between Organization and Company
+    # company_id = db.Column(db.Integer, db.ForeignKey('company.id'))
+    # companies = db.relationship('Company', foreign_keys=[company_id])
 
 
 class Company(User):
-    id = db.Column(db.Integer, primary_key=True)
-    sponsor_id = db.Column(db.Integer, db.ForeignKey('organization.id'), nullable=False)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    # sponsor_id = db.Column(db.Integer, db.ForeignKey('organization.id'), nullable=False)
