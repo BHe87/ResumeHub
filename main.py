@@ -64,6 +64,17 @@ def login():
 			return redirect(url_for('root'))	
 	return render_template('login.html', error=error)
 
+@app.route('/logout')
+def logout():
+	# if already logged in
+	if not g.user:
+		return redirect(url_for('root'))
+
+	flash('You were logged out!')
+	session.pop('user_id', None)
+	
+	return redirect(url_for('login'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -207,3 +218,11 @@ def save_profile():
 	
 	print("Ayy got it boss")
 	return redirect(url_for('profile'))
+
+@app.route('/student_submission')
+def submission_report():
+	if not g.user:
+		return redirect(url_for('login'))
+
+	
+
