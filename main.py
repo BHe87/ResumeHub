@@ -32,9 +32,9 @@ def root():
 	return render_template('index.html')
 	
 
-@app.route('/sign-in')
+@app.route('/login')
 def signIn():
-	return render_template('sign-in.html')
+	return render_template('login.html')
 
 
 @app.route('/home')
@@ -47,6 +47,7 @@ def profile():
 	return render_template('profile.html',
 						   YEAR=Year,
 						   GENDER=Gender)
+
 
 @app.route('/save_profile', methods=['POST'])
 def save_profile():
