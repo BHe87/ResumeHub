@@ -173,7 +173,7 @@ def save_profile():
 	if not g.user:
 		return redirect(url_for('login'))
 
-	student = Student.query.filter_by(username=User.username).first() # Not sure if this is correct
+	student = Student.query.get(session['user_id']) # Not sure if this is correct
 
 	if student == None:
 		print("Error: Student in NULL when saving profile", flush=True)
