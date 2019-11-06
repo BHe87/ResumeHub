@@ -1,13 +1,30 @@
 {% extends "base.html" %}
 <!DOCTYPE html>
 <html>
-{% block title %} ResumeHub {% endblock %}
+{% block title %} ResumeHub - Student {% endblock %}
 
 {% block head %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/student.css') }}">
 {{ super() }}
 {% endblock %}
 
 {% block container %}
-TODO
+  <div>
+    <p id="student_header" class="black">Affiliated Organizations</p>
+  </div>
+
+  <div>
+  {% for org in organizations %}
+    <div class="flex-container organization-box">
+      <div class="org-name">
+        <h1>{{ org.first_name }}</h1>
+      </div>
+      <div class="org-description">
+        <p>hello I am an Org</p>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
 {% endblock %}
 </html>
