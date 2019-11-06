@@ -75,8 +75,9 @@ def root():
 	if not g.user:
 		return redirect(url_for('login'))
 	
+	orgs = Student.query.get(session['user_id']).organizations
 	return render_template('index.html',
-							organizations=Organization.query.all())
+							organizations=orgs)
 	
 
 @app.route('/login', methods=['GET', 'POST'])
