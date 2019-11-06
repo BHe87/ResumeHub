@@ -231,8 +231,6 @@ def save_profile():
 		else:
 			student.phone = request.form.getlist('phone')[0]
 
-		student.filename = None;
-
 		print("Warning: {}\n".format(warn))
 
 		# Save to database
