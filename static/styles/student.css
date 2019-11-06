@@ -4,9 +4,32 @@
     text-align: center;
 }
 
-.flex-container {
-    position: relative;
-    display: inline-flex;
-    flex-direction: row;
+.organizations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+.flex-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.organization-box {
+    border-style: solid;;
+    width: 75%;
+}
+
+.organization-box .name {
+    text-align: center;
+    width: 50%;
+}
+
+.organization-box .description {
+    text-align: center;
+    width: 50%;
+}
