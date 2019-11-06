@@ -25,11 +25,15 @@
         {% endfor %}
     </div>
 </form>
-    <form method="post" action="{{ url_for('save_profile') }}">
+    <form method="post" action="{{ url_for('save_resume') }}" enctype="multipart/form-data">
         <div class="step step2">
             <div class="step-title">2. Add Resume</div>
             <input type="file" id="resume" name="resume">
+            <button type="submit">Add</button><br>
+            <a href="{{ url_for('download_resume', id=current_student.id) }}">Download my resume</a><br>
         </div>
+    </form>
+    <form method="post" action="{{ url_for('save_profile') }}">
         <div class="step step3">
             <div class="step-title">3. Tidbits</div>
             <div class="tidbits">

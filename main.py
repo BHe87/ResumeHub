@@ -1,10 +1,11 @@
-from flask import Flask, redirect, render_template, url_for, g, session, request, abort, flash
+from flask import Flask, redirect, render_template, url_for, g, session, request, abort, flash, make_response, send_file
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import check_password_hash, generate_password_hash
 
 from model import Company, db, Gender, Organization, Student, User, Year
 
-import os
+import os, io
+from base64 import b64encode
 
 # init
 app = Flask(__name__)
@@ -161,12 +162,18 @@ def profile():
 	# Check if user is not logged in. SKIP FOR NOW
 	if not g.user:
 		return redirect(url_for('login'))
+	current_student = Student.query.get(session['user_id'])
+	
+	resume = None
+	if current_student.resume is not None:
+		resume = b64encode(current_student.resume)
 
 	return render_template('profile.html',
-						   current_student=Student.query.get(session['user_id']),
+						   current_student=current_student,
 						   orgniazations=Organization.query.all(),
 						   YEAR=Year,
-						   GENDER=Gender)
+						   GENDER=Gender,
+						   resume=resume)
 
 
 @app.route('/save_profile', methods=['POST'])
@@ -174,29 +181,18 @@ def save_profile():
 	if not g.user:
 		return redirect(url_for('login'))
 
-	student = Student.query.filter_by(username=User.username).first() # Not sure if this is correct
+	student = Student.query.get(session['user_id'])
 
 	if student == None:
 		print("Error: Student in NULL when saving profile", flush=True)
 
 	# Collect which fields we are missing
 	warn = ""
-
-	isSaved = False;
+	isSaved = False
 
 	# Check we have stuff for each field
 	# Ideally we auto fill the info they already have?
 	if request.method == 'POST':
-		print("POST", flush=True)
-		for key in request.form.lists():
-			print(key)
-
-		if not request.form['resume']:
-			warn += "Missinng resume\n"
-		else:
-			print("Definitely adding the resume: {} ".format(request.form['resume']))
-			student.resume = request.form.getlist('resume')[0]
-
 		if not request.form['first-name']:
 			warn += "Missing name\n"
 		else:
@@ -238,15 +234,12 @@ def save_profile():
 			student.phone = request.form.getlist('phone')[0]
 
 		print("Warning: {}\n".format(warn))
-		print("Updating profile...")
-
-		
 
 		# Save to database
 		db.session.commit()
 
 		# Set the url parameter to true, since it has been saved to database
-		isSaved = True;
+		isSaved = True
 	
 	print("Ayy got it boss")
 	return redirect(url_for('student_submission', result=isSaved))
@@ -279,3 +272,35 @@ def add_organization():
 	db.session.commit()
 
 	return render_template('student_submission.html', result='true')
+
+
+@app.route('/save_resume', methods=['POST'])
+def save_resume():
+	if not g.user:
+		return redirect(url_for('login'))	
+
+	if 'resume' not in request.files:
+		flash('No selected file')
+		return redirect(url_for('profile'))
+
+	resume = request.files['resume']
+	# check if a file is selected
+	if resume.filename =='':
+		flash('No selected file')
+		return redirect(url_for('profile'))
+	# store a binary-converted file
+	data = resume.read()
+	Student.query.get(session['user_id']).resume = data
+	db.session.commit()
+
+	return redirect(url_for('profile'))
+
+
+@app.route('/resume/<int:id>')
+def download_resume(id):
+	resume = Student.query.get(id).resume
+	if not resume:
+		flash('Your resume does not exist')
+		return redirect(url_for('profile'))
+	return send_file(io.BytesIO(resume),
+					 mimetype='application/octet-stream')
