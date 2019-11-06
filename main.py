@@ -35,6 +35,8 @@ def before_request():
 	g.user = None
 	if 'user_id' in session:
 		g.user = User.query.get(session['user_id'])
+	
+
 
 
 @app.route('/')
@@ -155,6 +157,8 @@ def save_profile():
 	# Collect which fields we are missing
 	warn = ""
 
+	isSaved = False;
+
 	# Check we have stuff for each field
 	# Ideally we auto fill the info they already have?
 	if request.method == 'POST':
@@ -176,7 +180,7 @@ def save_profile():
 		if not request.form['last-name']:
 			warn += "Missing name\n"
 		else:
-		 	student.first_name = request.form.getlist('last-name')[0] # just use first name for now lol
+		 	student.last_name = request.form.getlist('last-name')[0] # just use first name for now lol
 
 		if not request.form['major']:
 			warn += "Missing major\n"
@@ -211,18 +215,29 @@ def save_profile():
 		print("Warning: {}\n".format(warn))
 		print("Updating profile...")
 
+		
+
 		# Save to database
 		db.session.commit()
 
-	# TODO redirect to appropriate success or fail screens
+		# Set the url parameter to true, since it has been saved to database
+		isSaved = True;
 	
 	print("Ayy got it boss")
-	return redirect(url_for('profile'))
+	return redirect(url_for('student_submission', result=isSaved))
 
 @app.route('/student_submission')
-def submission_report():
+def student_submission():
 	if not g.user:
 		return redirect(url_for('login'))
+
+	# Get the url argument to see if the profile was successfully saved
+	# The == Converts it into a boolean if the argument is "True"
+	isSaved = request.args.get('result') == "True"
+
+	return render_template('student_submission.html', result=isSaved)
+
+	
 
 	
 

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block container %}
+  <div>
+    {% if result %}
+      <p>Successfully submitted profile.</p>
+    {% else %}
+      <p>Failed to submit profile.</p>
+    {% endif %}
+  </div>
+{% endblock %}
