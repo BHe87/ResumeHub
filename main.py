@@ -74,7 +74,8 @@ def root():
 	if not g.user:
 		return redirect(url_for('login'))
 	
-	return render_template('index.html')
+	return render_template('index.html',
+							organizations=Organization.query.all())
 	
 
 @app.route('/login', methods=['GET', 'POST'])

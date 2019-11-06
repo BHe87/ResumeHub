@@ -1,0 +1,35 @@
+#student_header {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.organizations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.organization-box {
+    border-style: solid;;
+    width: 75%;
+}
+
+.organization-box .name {
+    text-align: center;
+    width: 50%;
+}
+
+.organization-box .description {
+    text-align: center;
+    width: 50%;
+}
