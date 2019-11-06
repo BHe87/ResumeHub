@@ -35,12 +35,15 @@ body {
 }  
 
 .bump {
-  min-height: 40px;
+  min-height: 45px;
 }
 
 .logo-svg {
   background: url(../svg/logo.svg) no-repeat center;
+  margin: 0px auto 0px;
+  margin-left: 10px;
   min-height: 150px;
+  max-height: 200px;
 }
 
 .board {
