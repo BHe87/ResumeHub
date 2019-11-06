@@ -153,11 +153,6 @@ def register():
 						   error=error)
 
 
-@app.route('/home')
-def home():
-	return render_template('home.html')
-
-
 @app.route('/profile')
 def profile():
 	# Check if user is not logged in. SKIP FOR NOW
