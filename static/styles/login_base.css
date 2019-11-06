@@ -38,6 +38,11 @@ body {
   min-height: 40px;
 }
 
+.logo-svg {
+  background: url(../svg/logo.svg) no-repeat center;
+  min-height: 150px;
+}
+
 .board {
   max-width: 440px;
   margin: 0px auto 0px;
