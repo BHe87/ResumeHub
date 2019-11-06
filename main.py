@@ -35,8 +35,6 @@ def before_request():
 	g.user = None
 	if 'user_id' in session:
 		g.user = User.query.get(session['user_id'])
-	
-
 
 
 @app.route('/')
@@ -130,16 +128,12 @@ def home():
 
 @app.route('/profile')
 def profile():
-
 	# Check if user is not logged in. SKIP FOR NOW
 	if not g.user:
 		return redirect(url_for('login'))
 
-	# Retrieve the student account - Am i sending the password hash?? lol
-	student = Student.query.filter_by(username=User.username).first()
-
 	return render_template('profile.html',
-						   STUDENT=student,
+						   current_student=Student.query.get(session['user_id']),
 						   YEAR=Year,
 						   GENDER=Gender)
 
