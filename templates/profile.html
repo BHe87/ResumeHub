@@ -27,7 +27,8 @@
 </form>
     <form method="post" action="{{ url_for('save_resume') }}" enctype="multipart/form-data">
         <div class="step step2">
-            <div class="step-title">2. Add Resume</div>
+            <div class="step-title">2. Add Resume </div>
+            <p>Current resume: {{ current_student.filename }}</p>
             <input type="file" id="resume" name="resume">
             <button type="submit">Add</button><br>
             <a href="{{ url_for('download_resumes', filename=current_student.filename) }}">Download my resume</a><br>
