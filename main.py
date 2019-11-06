@@ -231,6 +231,8 @@ def save_profile():
 		else:
 			student.phone = request.form.getlist('phone')[0]
 
+		student.filename = None;
+
 		print("Warning: {}\n".format(warn))
 
 		# Save to database
@@ -307,7 +309,7 @@ def save_resume():
 
 
 @app.route('/resume/<filename>')
-def download_resumes(filename):
+def download_resume(filename):
 	res = Student.query.get(session['user_id']).resume
 	filename = Student.query.get(session['user_id']).filename
 	print(filename, flush=True)

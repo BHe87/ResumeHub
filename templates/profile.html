@@ -4,6 +4,7 @@
 {% block title %} Upload Profile {% endblock %}
 
 {% block head %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/student.css') }}">
 {{ super() }}
 {% endblock %}
 
@@ -28,10 +29,19 @@
     <form method="post" action="{{ url_for('save_resume') }}" enctype="multipart/form-data">
         <div class="step step2">
             <div class="step-title">2. Add Resume </div>
-            <p>Current resume: {{ current_student.filename }}</p>
+            {% if current_student.filename is not none %}
+                <p>Current resume: {{ current_student.filename }}</p>
+            {% else %}
+                <p>No resume</p>
+            {% endif %}
+
             <input type="file" id="resume" name="resume">
             <button type="submit">Add</button><br>
-            <a href="{{ url_for('download_resumes', filename=current_student.filename) }}">Download my resume</a><br>
+            {% if current_student.filename is not none %}
+                <a href="{{ url_for('download_resume', filename=current_student.filename) }}">Download my resume</a><br>
+            {% else %}
+                <p class="disabled">Download my resume</p><br>
+            {% endif %}
         </div>
     </form>
     <form method="post" action="{{ url_for('save_profile') }}">

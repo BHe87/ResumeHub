@@ -84,3 +84,7 @@
 .submission-report .failed {
     font-size: 5rem;
 }
+
+.disabled {
+    text-decoration: line-through;
+}
