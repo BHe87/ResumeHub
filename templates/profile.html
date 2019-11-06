@@ -30,7 +30,7 @@
             <div class="step-title">2. Add Resume</div>
             <input type="file" id="resume" name="resume">
             <button type="submit">Add</button><br>
-            <a href="{{ url_for('download_resume', id=current_student.id) }}">Download my resume</a><br>
+            <a href="{{ url_for('download_resumes', filename=current_student.filename) }}">Download my resume</a><br>
         </div>
     </form>
     <form method="post" action="{{ url_for('save_profile') }}">

@@ -1,8 +1,9 @@
 from flask import Flask, redirect, render_template, url_for, g, session, request, abort, flash, make_response, send_file
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug import check_password_hash, generate_password_hash
+from werkzeug import check_password_hash, generate_password_hash, secure_filename
 
 from model import Company, db, Gender, Organization, Student, User, Year
+from werkzeug.datastructures import FileStorage
 
 import os, io
 from base64 import b64encode
@@ -275,6 +276,8 @@ def save_resume():
 	if not g.user:
 		return redirect(url_for('login'))	
 
+	student = Student.query.get(session['user_id'])
+
 	if 'resume' not in request.files:
 		flash('No selected file')
 		return redirect(url_for('profile'))
@@ -284,19 +287,34 @@ def save_resume():
 	if resume.filename =='':
 		flash('No selected file')
 		return redirect(url_for('profile'))
-	# store a binary-converted file
-	data = resume.read()
-	Student.query.get(session['user_id']).resume = data
-	db.session.commit()
+
+	# TODO check it is the correct type of file
+	if resume:
+		filename = secure_filename(resume.filename)
+		data = resume.read()
+
+		student.filename = filename
+		student.resume = data
+		
+		db.session.commit()
+		db.session.flush()
+
+
+		print("SAVED")
 
 	return redirect(url_for('profile'))
 
 
-@app.route('/resume/<int:id>')
-def download_resume(id):
-	resume = Student.query.get(id).resume
-	if not resume:
+@app.route('/resume/<filename>')
+def download_resumes(filename):
+	res = Student.query.get(session['user_id']).resume
+	filename = Student.query.get(session['user_id']).filename
+	print(filename, flush=True)
+
+	if not res:
+		print("Warn: No resume",flush=True)
 		flash('Your resume does not exist')
 		return redirect(url_for('profile'))
-	return send_file(io.BytesIO(resume),
+	else:
+		return send_file(io.BytesIO(res),
 					 mimetype='application/octet-stream')
