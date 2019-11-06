@@ -18,12 +18,16 @@ app.config.update(dict(
 db.init_app(app)
 
 
-@app.cli.command('initdb')
-def initdb_command():
+def init_db():
 	# Drop the database and create the new one
 	db.drop_all()
 	db.create_all()
 	print('Initialized the database')
+
+@app.cli.command('initdb')
+def initdb_command():
+	init_db()
+	
 
 
 @app.route('/')
