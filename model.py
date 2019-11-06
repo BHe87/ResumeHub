@@ -19,8 +19,8 @@ class Gender(enum.Enum):
 
 organizations = db.Table('organizations',
                 db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
-                db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True)
-)
+                db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True),
+                db.UniqueConstraint('organization_id', 'student_id', name='student_organization_no_duplicate'))
 
 
 class User(db.Model):

@@ -165,6 +165,7 @@ def profile():
 
 	return render_template('profile.html',
 						   current_student=Student.query.get(session['user_id']),
+						   orgniazations=Organization.query.all(),
 						   YEAR=Year,
 						   GENDER=Gender)
 
@@ -174,7 +175,7 @@ def save_profile():
 	if not g.user:
 		return redirect(url_for('login'))
 
-	student = Student.query.get(session['user_id']) # Not sure if this is correct
+	student = Student.query.filter_by(username=User.username).first() # Not sure if this is correct
 
 	if student == None:
 		print("Error: Student in NULL when saving profile", flush=True)
@@ -263,6 +264,19 @@ def student_submission():
 	return render_template('student_submission.html', result=isSaved)
 
 	
+@app.route('/add_organization', methods=['POST'])
+def add_organization():
+	if not g.user:
+		return redirect(url_for('login'))	
+	# save selected organization to the user (student)
+	organization = Organization.query.filter_by(username=request.form['organization']).first()
+	current_student = Student.query.get(session['user_id'])
+	# check if a student has already joined the organization;
+	# TODO: Remove this, and add UniqueConstraint to `organizations` in model.py in order to handle this properly
+	if organization in current_student.organizations:
+		return redirect(url_for('profile'))
 
-	
+	current_student.organizations.append(organization)
+	db.session.commit()
 
+	return render_template('student_submission.html', result='true')

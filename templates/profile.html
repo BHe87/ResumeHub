@@ -8,50 +8,64 @@
 {% endblock %}
 
 {% block container %}
-<form method="post" action="{{ url_for('save_profile') }}">
+<form method="post" action="{{ url_for('add_organization') }}">
     <div class="step step1">
         <div class="step-title">1. Join Organizations</div>
-    </div>
-    <div class="step step2">
-        <div class="step-title">2. Add Resume</div>
-        <input type="file" id="resume" name="resume">
-    </div>
-    <div class="step step3">
-        <div class="step-title">3. Tidbits</div>
-        <div class="tidbits">
-            <label for="name">First:</label>
-            <input type="text" name="first-name" id="name" placeholder="First Name" value="{{ current_student.first_name }}">
-            <label for="name">Last:</label>
-            <input type="text" name="last-name" id="name" placeholder="Name" value="{{ current_student.last_name }}""><br>
-            <label for="major">Major:</label>
-            <input type="text" name="major" id="major" placeholder="Computer Science" value="{{ current_student.major }}">
-            <label for="minor">Minor:</label>
-            <input type="text" name="minor" id="minor" value="{{ current_student.minor }}"><br>
-            <label for="grade">Grade:</label>
-            <select id="grade" name="grade">
-                {% for x in YEAR %}
-                <option value={{ x.name }} {% if x == current_student.year %} selected {% endif %}>
-                    {{ x.value }}
-                </option>
-                {% endfor %}
-            </select>
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender">
-                {% for x in GENDER %}
-                <option value={{ x.name }} {% if x == current_student.gender %} selected {% endif %}>
-                    {{ x.value }}
-                </option>
-                {% endfor %}
-            </select>
-            <label for="gpa">GPA:</label>
-            <input type="text" name="gpa" id="gpa" value="{{ current_student.gpa }}"><br>
-            <label for="phone">Phone Number:</label>
-            <input type="text" name="phone" id="phone" placeholder="123-456-6789" value="{{ current_student.phone }}"><br>
-        </div>
-    </div>
-    <div class="save-container">
-        <input type="submit" class="button save-profile" value="Save Profile"></button>
+        <select id="organization" name="organization">
+            {% for x in orgniazations %}
+            <option value={{ x.username }}>
+                {{ x.username }}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Join</button><br>
+        <span>My organizations:</span><br>
+        {% for x in current_student.organizations %}
+        {{ x.username }}
+        {% endfor %}
     </div>
 </form>
+    <form method="post" action="{{ url_for('save_profile') }}">
+        <div class="step step2">
+            <div class="step-title">2. Add Resume</div>
+            <input type="file" id="resume" name="resume">
+        </div>
+        <div class="step step3">
+            <div class="step-title">3. Tidbits</div>
+            <div class="tidbits">
+                <label for="name">First:</label>
+                <input type="text" name="first-name" id="name" placeholder="First Name" value="{{ current_student.first_name }}">
+                <label for="name">Last:</label>
+                <input type="text" name="last-name" id="name" placeholder="Name" value="{{ current_student.last_name }}""><br>
+                <label for="major">Major:</label>
+                <input type="text" name="major" id="major" placeholder="Computer Science" value="{{ current_student.major }}">
+                <label for="minor">Minor:</label>
+                <input type="text" name="minor" id="minor" value="{{ current_student.minor }}"><br>
+                <label for="grade">Grade:</label>
+                <select id="grade" name="grade">
+                    {% for x in YEAR %}
+                    <option value={{ x.name }} {% if x == current_student.year %} selected {% endif %}>
+                        {{ x.value }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    {% for x in GENDER %}
+                    <option value={{ x.name }} {% if x == current_student.gender %} selected {% endif %}>
+                        {{ x.value }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <label for="gpa">GPA:</label>
+                <input type="text" name="gpa" id="gpa" value="{{ current_student.gpa }}"><br>
+                <label for="phone">Phone Number:</label>
+                <input type="text" name="phone" id="phone" placeholder="123-456-6789" value="{{ current_student.phone }}"><br>
+            </div>
+        </div>
+        <div class="save-container">
+            <input type="submit" class="button save-profile" value="Save Profile"></button>
+        </div>
+    </form>
 {% endblock %}
 </html>
