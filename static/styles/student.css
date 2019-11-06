@@ -4,6 +4,13 @@
     text-align: center;
 }
 
+#org-person {
+    margin-top: 0.0rem;
+    margin-bottom: 2rem;
+    margin-right: 0.4rem;
+    width: 1.1rem;
+}
+
 .organizations {
     display: flex;
     flex-direction: column;
@@ -20,16 +27,44 @@
 }
 
 .organization-box {
-    border-style: solid;;
     width: 75%;
+    height: 8rem;
+    margin-bottom: 45px;
+
+    background-color: #FCFCFC;
+
+    border-style: solid;
+    border-color: #57d7dd;
+    /* border-width: 5px; */
+    border-width: 0.3rem;
+    border-radius: 0.35rem;
+}
+
+.organization-box .info {
+    width: 35%;
+    text-align: center;
 }
 
 .organization-box .name {
-    text-align: center;
-    width: 50%;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.organization-box .stats {
+    margin-top: 0.0rem;
+    margin-bottom: 2rem;
+    color: #5E5266;
+    font-weight: 300;
+    font-size: 1.2rem;
 }
 
 .organization-box .description {
-    text-align: center;
-    width: 50%;
+    width: 65%;
+    text-align: left;
+
+    color: #5E5266;
+    font-size: 1.2rem;
+    font-weight: 400;
 }

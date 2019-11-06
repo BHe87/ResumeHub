@@ -16,11 +16,15 @@
   <div class="organizations">
   {% for org in organizations %}
     <div class="flex-container organization-box">
-      <div class="name">
-        <h1>{{ org.first_name }}</h1>
+      <div class="info">
+        <p class="name">{{ org.first_name }}<p>
+        <div class="flex-container">
+          <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+          <p class="stats">{{ org.id }} Students</p>
+        </div>
       </div>
       <div class="description">
-        <p>hello I am an Org</p>
+        <p>{{ org.description }}</p>
       </div>
     </div>
   {% endfor %}

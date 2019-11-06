@@ -13,7 +13,7 @@
         <div class="step-title">1. Join Organizations</div>
         <select id="organization" name="organization">
             {% for org in orgniazations %}
-            <option value={{ x.username }}>
+            <option value={{ org.username }}>
                 {{ org.username }}
             </option>
             {% endfor %}
