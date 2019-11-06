@@ -14,6 +14,7 @@ class Year(enum.Enum):
 class Gender(enum.Enum):
     MALE = "Male"
     FEMALE = "Female"
+    OTHER = "Other"
 
 
 organizations = db.Table('organizations',
