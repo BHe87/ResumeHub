@@ -13,6 +13,10 @@
     background: #01A2A6;
 }
 
+.primary-600 {
+    color: #01848a;
+}
+
 .primary-400 {
     color: #2CB2B8;
 }
@@ -20,9 +24,17 @@
     background: #2CB2B8;
 }
 
+.primary-300 {
+    color: #44c5cb;
+}
+
 .primary-200 {
     color: #5FD7DD;
 }
 .primary-200-bg {
     background: #5FD7DD;
+}
+
+.accent {
+    color: #A453D8;
 }

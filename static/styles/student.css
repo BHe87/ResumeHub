@@ -34,7 +34,7 @@
     background-color: #FCFCFC;
 
     border-style: solid;
-    border-color: #57d7dd;
+    border-color: #44c5cb;
     /* border-width: 5px; */
     border-width: 0.3rem;
     border-radius: 0.35rem;
@@ -67,4 +67,20 @@
     color: #5E5266;
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+.submission-report {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.submission-report .worked {
+    font-size: 5rem;
+}  
+
+.submission-report .failed {
+    font-size: 5rem;
 }
