@@ -30,13 +30,17 @@
             <label for="grade">Grade:</label>
             <select id="grade" name="grade">
                 {% for x in YEAR %}
-                <option value={{ x.name }}>{{ x.value }}</option>
+                <option value={{ x.name }} {% if x == STUDENT.year %} selected {% endif %}>
+                    {{ x.value }}
+                </option>
                 {% endfor %}
             </select>
             <label for="gender">Gender:</label>
             <select id="gender" name="gender">
                 {% for x in GENDER %}
-                <option value={{ x.name }}>{{ x.value }}</option>
+                <option value={{ x.name }} {% if x == STUDENT.gender %} selected {% endif %}>
+                    {{ x.value }}
+                </option>
                 {% endfor %}
             </select>
             <label for="gpa">GPA:</label>
