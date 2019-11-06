@@ -25,8 +25,38 @@ def initdb_command():
 	db.drop_all()
 	db.create_all()
 
-	# Add admin account
-
+	# hardcode organization(s)
+	db.session.add(Organization(username='Fresa',
+								pw_hash=generate_password_hash('fresa'),
+								email='Fresa@pitt.edu',
+								first_name='Fresa',
+								last_name='Fresa',
+								description='Dance together!'))
+	db.session.add(Organization(username='KSA',
+								pw_hash=generate_password_hash('ksa'),
+								email='KSA@pitt.edu',
+								first_name='KSA',
+								last_name='KSA',
+								description='Koreans squads!'))
+	db.session.add(Organization(username='ASA',
+								pw_hash=generate_password_hash('asa'),
+								email='ASA@pitt.edu',
+								first_name='ASA',
+								last_name='ASA',
+								description='Asian squads!'))
+	db.session.add(Organization(username='WiCS',
+								pw_hash=generate_password_hash('wics'),
+								email='WiCS@pitt.edu',
+								first_name='WiCS',
+								last_name='WiCS',
+								description='Women in CS!'))
+	db.session.add(Organization(username='GlobalTie',
+								pw_hash=generate_password_hash('globaltie'),
+								email='GlobalTie@pitt.edu',
+								first_name='GlobalTie',
+								last_name='GlobalTie',
+								description='Global Tie!'))
+	db.session.commit()
 	print('Initialized the database')
 
 
