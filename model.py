@@ -41,10 +41,13 @@ class Student(User):
     year = db.Column(db.Enum(Year), nullable=False)
     major = db.Column(db.String(50))
     minor = db.Column(db.String(50))
-    resume = db.Column(db.LargeBinary)
     gender = db.Column(db.Enum(Gender))
     gpa = db.Column(db.Float)
     phone = db.Column(db.String(10))
+
+    # Resume file
+    resume = db.Column(db.LargeBinary)
+    filename = db.Column(db.String(50))
 
 
 class Organization(User):
