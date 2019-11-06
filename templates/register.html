@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="static/styles/createAccount.css">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/fonts.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/colors.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/login_base.css') }}">
 </head>
 
 <body>
-  <div class="newAccountPage">
-    <div class="form">
-      {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-      <form class="newAccountForm" name="newAccountForm" id="newAccountForm" method="post" action="{{ url_for('register') }}">
-        Username
-        <input type="text" name="username" placeholder="username"/>
-        Password
-        <input type="password" name="password" placeholder="password"/>
-        Re-enter Password
-        <input type="password" name="password2" placeholder="password"/>
-        Email Address
-        <input type="text" name="email" placeholder="email"/>
-        <br><b>Account Type</b><br>
-        Student (MUST CHOOSE THIS FOR THIS MILESTONE)
-        <input type="radio" name="accountType" id="student" value="Student">
-        Student Organization
-        <input type="radio" name="accountType" id="studentOrganization" value="Organization">
-        Company
-        <input type="radio" name="accountType" id="company" value="Company">
-        <br>
-        First Name
-        <input type="text" name="firstName" placeholder="First Name"/>
-        Last Name
-        <input type="text" name="lastName" placeholder="Last Name"/>
-        <!-- TODO: do we need this when registering? -->
-        <!-- Organization Affliated With
-        <input type="text" name="organization" placeholder="Organization Name"/> -->
-        Grade
-        <select name="grade" id="grade">
-            {% for x in YEAR %}
-            <option value={{ x.name }}>{{ x.value }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        Major
-        <input type="text" name="major" placeholder="Major"/>
-        Minor
-        <input type="text" name="minor" placeholder="Minor"/>
-        <br><b>Gender</b><br>
-        {% for x in GENDER %}
-          {{ x.value }}<input type="radio" name="gender" id="gender" value={{ x.name }}>
-        {% endfor %}
-        Other
-        <input type="radio" name="gender" id="gender" value="Other">
-        Cumulative GPA
-        <input type="text" name="GPA" placeholder="Cumulative GPA"/>
-        Phone Number
-        <input type="text" name="phoneNumber" placeholder="Phone Number"/>
-        <button type="submit">Create Account</button>
-      </form>
+  <div class="bg">
+    <div class="bg-gradient"> 
+      <div class="bg-svg">
+        <div class="bump"></div>
+        <div class="board">
+          <div class="form">
+            {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            <form class="newAccountForm" name="newAccountForm" id="newAccountForm" method="post" action="{{ url_for('register') }}">
+              Username
+              <input type="text" name="username" placeholder="username"/>
+              Password
+              <input type="password" name="password" placeholder="password"/>
+              Re-enter Password
+              <input type="password" name="password2" placeholder="password"/>
+              Email Address
+              <input type="text" name="email" placeholder="email"/>
+              <br><b>Account Type</b><br>
+              Student (MUST CHOOSE THIS FOR THIS MILESTONE)
+              <input type="radio" name="accountType" id="student" value="Student">
+              Student Organization
+              <input type="radio" name="accountType" id="studentOrganization" value="Organization">
+              Company
+              <input type="radio" name="accountType" id="company" value="Company">
+              <br>
+              First Name
+              <input type="text" name="firstName" placeholder="First Name"/>
+              Last Name
+              <input type="text" name="lastName" placeholder="Last Name"/>
+              <!-- TODO: do we need this when registering? -->
+              <!-- Organization Affliated With
+              <input type="text" name="organization" placeholder="Organization Name"/> -->
+              Grade
+              <select name="grade" id="grade">
+                  {% for x in YEAR %}
+                  <option value={{ x.name }}>{{ x.value }}</option>
+                  {% endfor %}
+              </select>
+              <br>
+              Major
+              <input type="text" name="major" placeholder="Major"/>
+              Minor
+              <input type="text" name="minor" placeholder="Minor"/>
+              <br><b>Gender</b><br>
+              {% for x in GENDER %}
+                {{ x.value }}<input type="radio" name="gender" id="gender" value={{ x.name }}>
+              {% endfor %}
+              Cumulative GPA
+              <input type="text" name="GPA" placeholder="Cumulative GPA"/>
+              Phone Number
+              <input type="text" name="phoneNumber" placeholder="Phone Number"/>
+              <button class="primary-bg" type="submit">Create Account</button>
+            </form>
+            </div>
+          </div>
+          <div class="bump"></div>
+        </div>
+      </div>
     </div>
-  </div>
-  <script src="static/js/createAccount.js?v1.0"></script>
+  </div>  
 </body>
 
 </html>
