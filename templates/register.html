@@ -18,13 +18,13 @@
             {% endif %}
             <form class="newAccountForm" name="newAccountForm" id="newAccountForm" method="post" action="{{ url_for('register') }}">
               Username
-              <input type="text" name="username" placeholder="username"/>
+              <input type="text" name="username" placeholder="username" required/>
               Password
-              <input type="password" name="password" placeholder="password"/>
+              <input type="password" name="password" placeholder="password" required/>
               Re-enter Password
-              <input type="password" name="password2" placeholder="password"/>
+              <input type="password" name="password2" placeholder="password" required/>
               Email Address
-              <input type="text" name="email" placeholder="email"/>
+              <input type="text" name="email" placeholder="email" required/>
               <br><b>Account Type</b><br>
               Student (MUST CHOOSE THIS FOR THIS MILESTONE)
               <input type="radio" name="accountType" id="student" value="Student">
@@ -34,9 +34,9 @@
               <input type="radio" name="accountType" id="company" value="Company">
               <br>
               First Name
-              <input type="text" name="firstName" placeholder="First Name"/>
+              <input type="text" name="firstName" placeholder="First Name" required/>
               Last Name
-              <input type="text" name="lastName" placeholder="Last Name"/>
+              <input type="text" name="lastName" placeholder="Last Name" required/>
               <!-- TODO: do we need this when registering? -->
               <!-- Organization Affliated With
               <input type="text" name="organization" placeholder="Organization Name"/> -->
@@ -48,7 +48,7 @@
               </select>
               <br>
               Major
-              <input type="text" name="major" placeholder="Major"/>
+              <input type="text" name="major" placeholder="Major" required/>
               Minor
               <input type="text" name="minor" placeholder="Minor"/>
               <br><b>Gender</b><br>
@@ -56,9 +56,9 @@
                 {{ x.value }}<input type="radio" name="gender" id="gender" value={{ x.name }}>
               {% endfor %}
               Cumulative GPA
-              <input type="text" name="GPA" placeholder="Cumulative GPA"/>
+              <input type="text" name="GPA" placeholder="Cumulative GPA" required/>
               Phone Number
-              <input type="text" name="phoneNumber" placeholder="Phone Number"/>
+              <input type="text" name="phoneNumber" placeholder="Phone Number" required/>
               <button class="primary-bg" type="submit">Create Account</button>
             </form>
             </div>

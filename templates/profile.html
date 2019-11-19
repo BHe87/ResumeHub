@@ -13,7 +13,7 @@
     <div class="step step1">
         <div class="step-title">1. Join Organizations</div>
         <select id="organization" name="organization">
-            {% for org in orgniazations %}
+            {% for org in organizations %}
             <option value={{ org.username }}>
                 {{ org.username }}
             </option>
@@ -76,6 +76,7 @@
                 <input type="text" name="gpa" id="gpa" value="{{ current_student.gpa }}"><br>
                 <label for="phone">Phone Number:</label>
                 <input type="text" name="phone" id="phone" placeholder="123-456-6789" value="{{ current_student.phone }}"><br>
+                <input type="text" name="skills" id="skills" placeholder="ex. Java" value=""><br>
             </div>
         </div>
         <div class="save-container">
