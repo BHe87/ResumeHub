@@ -380,3 +380,12 @@ def download_resume(filename):
 	else:
 		return send_file(io.BytesIO(res),
 					 mimetype='application/octet-stream')
+
+
+@app.route('/organization')
+def organization():
+	# if not logged in
+	if not g.user:
+		return redirect(url_for('login'))
+	
+	return render_template('org.html')
