@@ -35,7 +35,7 @@
                 <p>No resume</p>
             {% endif %}
 
-            <input type="file" id="resume" name="resume" accept=".pdf">
+            <input type="file" id="resume" name="resume" accept=".pdf" data-max-size="1000000">
             <button type="submit">Add</button><br>
             {% if current_student.filename is not none %}
                 <a href="{{ url_for('download_resume', filename=current_student.filename) }}">Download my resume</a><br>
