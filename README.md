@@ -3,7 +3,7 @@
 ## Getting Started
 
 ### Prerequisites
-TODO
+Install python (version 3), pip (python package manager) should come with it.
 
 ### Installing
 
@@ -75,9 +75,4 @@ CTRL+C
 To deactivate the virtual environment:
 ```
 $ deactivate
-```
-
-On Windows:
-```
-> deactivate
 ```
