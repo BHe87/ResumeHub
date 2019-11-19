@@ -60,7 +60,7 @@ class User(db.Model):
 
 class Student(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    organizations = db.relationship('Organization', secondary=organizations, backref=db.backref('students'))
+    organizations = db.relationship('Organization', secondary=organizations_and_students, backref=db.backref('students'))
 
     # profile base attributes
     year = db.Column(db.Enum(Year), nullable=False)
