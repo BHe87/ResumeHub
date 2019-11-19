@@ -17,10 +17,35 @@ class Gender(enum.Enum):
     OTHER = "Other"
 
 
-organizations = db.Table('organizations',
+class WorkStatus(enum.Enum):
+    VISA = "Require Visa sponsorship"
+    USCITIZEN = "U.S. Citizen"
+
+
+class Clearance(enum.Enum):
+    PUBLICTRUST = "Public Trust"
+    SECRET = "Secret"
+    TOPSECRET = "Top Secret"
+    CONFIDENTIAL = "Confidential"
+    OTHER = "Other"
+    NONE = "None of the above"
+
+
+class SearchStatus(enum.Enum):
+    ACTIVE = "Actively searching for opportunities"
+    OPEN = "Not actively searching, but open to opportunities"
+    CLOSED = "Not open to opportunities"
+
+
+organizations_and_students = db.Table('organizations_and_students',
                 db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
                 db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True),
                 db.UniqueConstraint('organization_id', 'student_id', name='student_organization_no_duplicate'))
+
+organizations_and_companies = db.Table('organizations_and_companies',
+                db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
+                db.Column('company_id', db.Integer, db.ForeignKey('company.id'), primary_key=True),
+                db.UniqueConstraint('organization_id', 'company_id', name='company_organization_no_duplicate'))
 
 
 class User(db.Model):
