@@ -1,0 +1,123 @@
+{
+  "id": "18559b26-429e-4059-bf8b-86586f8998cf",
+  "version": "2.0",
+  "name": "ResumeHub-FrontEnd",
+  "url": "http://127.0.0.1:5000",
+  "tests": [{
+    "id": "78ec1fdd-c9d4-43c6-9797-0929981a2f3e",
+    "name": "Trying to Sign in with blank fields",
+    "commands": [{
+      "id": "73b5a7d5-2482-4b06-8be8-de15684dbdff",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2a3e608a-c675-4f11-8c50-ab60902b2504",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x822",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e8be7e53-7145-420a-be7a-fc2c445ded96",
+      "comment": "",
+      "command": "click",
+      "target": "css=.primary-bg",
+      "targets": [
+        ["css=.primary-bg", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ed927d35-1478-4af4-a6e2-31ebd407fc35",
+    "name": "Sign In to Human",
+    "commands": [{
+      "id": "b6f392bb-8721-41da-9e31-d3c82d68f467",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8e748b50-68cc-46b6-baa0-13ced19ac03b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "607x823",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "90012461-9ee2-4eb4-be55-6ea45620e6d3",
+      "comment": "",
+      "command": "click",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=input:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dfd12550-de25-4530-ab8f-1d19fd64ad51",
+      "comment": "",
+      "command": "type",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=input:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Human"
+    }, {
+      "id": "e8e3a5e2-d0ae-40d6-a844-e7a835af460c",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb7899df-aa74-4e42-ae40-2814e7b26f18",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "123456"
+    }, {
+      "id": "c74d7ce7-bccb-4722-86ab-8424d7177940",
+      "comment": "",
+      "command": "click",
+      "target": "css=.primary-bg",
+      "targets": [
+        ["css=.primary-bg", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "27fc8552-78b3-4ec5-948f-f24a7a12b29d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:5000/"],
+  "plugins": []
+}
