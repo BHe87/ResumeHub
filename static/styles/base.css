@@ -5,6 +5,10 @@ body {
 	margin: 0;
 }
 
+.error {
+	color: red;
+}
+
 .topnav {
 	background: #01848a;;            
 	overflow: hidden;

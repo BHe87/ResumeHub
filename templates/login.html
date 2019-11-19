@@ -16,7 +16,7 @@
       <div class="board">
         <div class="form">
           {% if error %}
-          <p class="error"><strong>Error:</strong> {{ error }}
+          <p class="error" style="color:red"><strong>Error: {{ error }}</strong></p>
           {% endif %}    
           <form class="login-form" action="{{ url_for('login') }}" method="POST">
             username
