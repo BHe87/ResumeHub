@@ -27,6 +27,19 @@ def initdb_command():
 	db.drop_all()
 	db.create_all()
 
+	db.session.add(Student(username='Human',
+						   pw_hash=generate_password_hash('123456'),
+						   email='test@resumehub.com',
+						   first_name='Human',
+						   last_name='Namuh',
+						   description='I am a student',
+						   year=Year.SENIOR,
+						   major='CS',
+						   minor='LIFE',
+						   gender=Gender.OTHER,
+						   gpa=4.0,
+						   phone='123456789'))
+
 	# hardcode organization(s)
 	db.session.add(Organization(username='Fresa',
 								pw_hash=generate_password_hash('fresa'),
