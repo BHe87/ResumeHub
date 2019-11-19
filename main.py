@@ -38,7 +38,7 @@ def initdb_command():
 						   minor='LIFE',
 						   gender=Gender.OTHER,
 						   gpa=4.0,
-						   work_status=WorkStatus.US,
+						   work_status=WorkStatus.USCITIZEN,
 						   clearance=Clearance.NONE,
 						   search_status=SearchStatus.OPEN,
 						   phone='123456789'))
