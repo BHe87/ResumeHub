@@ -140,6 +140,16 @@ def register():
 			error = 'Please, enter a first name'
 		elif not request.form['lastName']:
 			error = 'Please, enter a last name'
+		elif not request.form['major']:
+			error = 'Please, enter a major'
+		elif not request.form['minor']:
+			error = 'Please, enter a minor'
+		elif not request.form['phoneNumber']:
+			error = 'Please, enter a phone number'
+		elif len(request.form['phoneNumber']) != 10:
+			error = 'Please, enter a valid phone number'
+		elif not request.form['GPA']:
+			error = 'Please, enter a GPA'	
 		# TODO: check username and email constraints
 		# elif User.query.filter_by(username=request.form['username']).first():
 		# 	error = request.form['username'] + ' - This username is in use'
@@ -180,7 +190,7 @@ def profile():
 
 	return render_template('profile.html',
 						   current_student=current_student,
-						   orgniazations=Organization.query.all(),
+						   organizations=Organization.query.all(),
 						   YEAR=Year,
 						   GENDER=Gender,
 						   resume=resume)
