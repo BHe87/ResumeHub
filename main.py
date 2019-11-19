@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, url_for, g, session, request
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import check_password_hash, generate_password_hash, secure_filename
 
-from model import Company, db, Gender, Organization, Student, User, Year
+from model import Company, db, Gender, Organization, Student, User, Year, WorkStatus, Clearance, SearchStatus
 from werkzeug.datastructures import FileStorage
 
 import os, io
