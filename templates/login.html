@@ -26,12 +26,12 @@
           <p class="error" style="color:red"><strong>Error: {{ error }}</strong></p>
           {% endif %}    
           <form class="login-form" action="{{ url_for('login') }}" method="POST">
-            username
+            Username
             <input name="username" type="text" placeholder="email address"/>
             Password
             <input name="password" type="password" placeholder="password"/>
             <button class="primary-bg" type="submit">Sign In</button>
-            <p class="message">Not registered? <a href="{{ url_for('register') }}">Create an account</a></p>
+            <p class="message">Not Registered? <a href="{{ url_for('register') }}">Create an Account</a></p>
           </form>
         </div>
       </div>
