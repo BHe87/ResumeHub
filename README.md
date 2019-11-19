@@ -7,9 +7,9 @@ TODO
 
 ### Installing
 
-A step by step to get a development env running
+A step-by-step to get a development env running
 
-Create a virtual enviornment, For example:
+Create a virtual environment, For example:
 ```
 $ python3 -m venv venv
 ```
@@ -20,7 +20,7 @@ On Windows:
 ```
 
 
-To activate a virtual enviornment:
+To activate a virtual environment:
 ```
 $ . venv/bin/activate
 ```
@@ -43,7 +43,7 @@ pip install Flask-SQLAlchemy
 ```
 
 
-Set up an enviornment variable:
+Set up an environment variable:
 ```
 $ export FLASK_APP=main.py
 ```
@@ -72,7 +72,7 @@ CTRL+C
 ```
 
 
-To deactivate the virtual enviornment:
+To deactivate the virtual environment:
 ```
 $ deactivate
 ```
