@@ -16,7 +16,7 @@ $ python3 -m venv venv
 
 On Windows:
 ```
-> TODO
+$ python3 -m venv venv
 ```
 
 
@@ -27,7 +27,7 @@ $ . venv/bin/activate
 
 On Windows:
 ```
-> TODO
+$ venv\Scripts\activate
 ```
 
 
@@ -79,5 +79,5 @@ $ deactivate
 
 On Windows:
 ```
-> TODO
+> deactivate
 ```
