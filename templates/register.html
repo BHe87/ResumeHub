@@ -17,6 +17,14 @@
             <p class="error"><strong>Error:</strong> {{ error }}</p>
             {% endif %}
             <form class="newAccountForm" name="newAccountForm" id="newAccountForm" method="post" action="{{ url_for('register') }}">
+              <br><b>Account Type</b><br>
+              Student
+              <input type="radio" name="accountType" id="student" value="Student">
+              Student Organization
+              <input type="radio" name="accountType" id="studentOrganization" value="Organization">
+              Company
+              <input type="radio" name="accountType" id="company" value="Company">
+              <br>
               Username
               <input type="text" name="username" placeholder="username" required/>
               Password
@@ -25,18 +33,12 @@
               <input type="password" name="password2" placeholder="password" required/>
               Email Address
               <input type="text" name="email" placeholder="email" required/>
-              <br><b>Account Type</b><br>
-              Student (MUST CHOOSE THIS FOR THIS MILESTONE)
-              <input type="radio" name="accountType" id="student" value="Student">
-              Student Organization
-              <input type="radio" name="accountType" id="studentOrganization" value="Organization">
-              Company
-              <input type="radio" name="accountType" id="company" value="Company">
-              <br>
+              Organization Name (if applicable)
+              <input type="text" name="organizationName">
               First Name
-              <input type="text" name="firstName" placeholder="First Name" required/>
+              <input type="text" name="firstName" placeholder="First Name"/>
               Last Name
-              <input type="text" name="lastName" placeholder="Last Name" required/>
+              <input type="text" name="lastName" placeholder="Last Name"/>
               <!-- TODO: do we need this when registering? -->
               <!-- Organization Affliated With
               <input type="text" name="organization" placeholder="Organization Name"/> -->
@@ -48,7 +50,7 @@
               </select>
               <br>
               Major
-              <input type="text" name="major" placeholder="Major" required/>
+              <input type="text" name="major" placeholder="Major"/>
               Minor
               <input type="text" name="minor" placeholder="Minor"/>
               <br><b>Gender</b><br>
@@ -56,9 +58,37 @@
                 {{ x.value }}<input type="radio" name="gender" id="gender" value={{ x.name }}>
               {% endfor %}
               Cumulative GPA
-              <input type="text" name="GPA" placeholder="Cumulative GPA" required/>
+              <input type="text" name="GPA" placeholder="Cumulative GPA"/>
               Phone Number
-              <input type="text" name="phoneNumber" placeholder="Phone Number" required/>
+              <input type="text" name="phoneNumber" placeholder="Phone Number"/>
+              <br><b>Work Status</b><br>
+              Visa
+              <input type="radio" name="workStatus" id="visa" value="Visa">
+              US Citizen
+              <input type="radio" name="workStatus" id="USCitizen" value="USCitizen">
+              <br>
+              <br><b>Clearance Status</b><br>
+              Public Trust
+              <input type="radio" name="clearanceStatus" id="publicTrust" value="Public Trust">
+              Secret
+              <input type="radio" name="clearanceStatus" id="secret" value="Secret">
+              Top Secret
+              <input type="radio" name="clearanceStatus" id="topSecret" value="Top Secret">
+              Confidential
+              <input type="radio" name="clearanceStatus" id="confidential" value="Confidential">
+              Other
+              <input type="radio" name="clearanceStatus" id="other" value="Other">
+              None
+              <input type="radio" name="clearanceStatus" id="none" value="None">
+              <br>
+              <br><b>Search Status</b><br>
+              Active
+              <input type="radio" name="searchStatus" id="active" value="Active">
+              Open
+              <input type="radio" name="searchStatus" id="open" value="Open">
+              Closed
+              <input type="radio" name="searchStatus" id="closed" value="Closed">
+              <br>
               <button class="primary-bg" type="submit">Create Account</button>
             </form>
             </div>
