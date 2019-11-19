@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+{% block title %} ResumeHub - Organization {% endblock %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/org.css') }}">
+{{ super() }}
+{% endblock %}
+
+{% block container %}
+  <div>
+    <p id="org-name" class="black">{{TODO}}</p>
+  </div>
+  
+{% endblock %}
+</html>
