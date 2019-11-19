@@ -22,7 +22,7 @@
         <button type="submit">Join</button><br>
         <span>My organizations:</span><br>
         {% for org in current_student.organizations %}
-        {{ org.username }}
+        {{ org.name }}
         {% endfor %}
     </div>
 </form>
@@ -40,7 +40,7 @@
             {% if current_student.filename is not none %}
                 <a href="{{ url_for('download_resume', filename=current_student.filename) }}">Download my resume</a><br>
             {% else %}
-                <p class="disabled">Download my resume</p><br>
+                <p class="disabled">Download my Resume</p><br>
             {% endif %}
         </div>
     </form>
@@ -75,8 +75,7 @@
                 <label for="gpa">GPA:</label>
                 <input type="text" name="gpa" id="gpa" value="{{ current_student.gpa }}"><br>
                 <label for="phone">Phone Number:</label>
-                <input type="text" name="phone" id="phone" placeholder="123-456-6789" value="{{ current_student.phone }}"><br>
-                <input type="text" name="skills" id="skills" placeholder="ex. Java" value=""><br>
+                <input type="text" name="phone" id="phone" placeholder="1234566789" value="{{ current_student.phone }}"><br>
             </div>
         </div>
         <div class="save-container">
