@@ -15,7 +15,8 @@ app.config.update(dict(
 	SECRET_KEY='GROUP18_RESUMEHUB',
 	USERNAME='admin',
 	PASSWORD='greatpassword',
-	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(app.root_path, 'resumehub.db')
+	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(app.root_path, 'resumehub.db'),
+	SQLALCHEMY_TRACK_MODIFICATIONS = False
 ))
 
 db.init_app(app)
