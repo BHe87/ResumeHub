@@ -17,7 +17,7 @@
   {% for org in organizations %}
     <div class="flex-container organization-box">
       <div class="info">
-        <p class="name">{{ org.first_name }}<p>
+        <p class="name">{{ org.name }}<p>
         <div class="flex-container">
           <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
           <p class="stats">{{ org.id }} Students</p>

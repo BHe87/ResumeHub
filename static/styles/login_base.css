@@ -87,3 +87,9 @@ body {
 .form button:hover,.form button:active,.form button:focus {
   background: #5FD7DD;
 }
+
+.flash {
+  text-align: center;
+  color: red;
+  font-size: 25px;
+}
