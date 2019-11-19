@@ -55,7 +55,7 @@ class User(db.Model):
     email = db.Column(db.String(320), nullable=False)
     #first_name = db.Column(db.String(50), nullable=False)
     #last_name = db.Column(db.String(50), nullable=False)
-    #description = db.Column(db.Text)
+    description = db.Column(db.Text)
 
 
 class Student(User):
@@ -63,17 +63,17 @@ class Student(User):
     organizations = db.relationship('Organization', secondary=organizations_and_students, backref=db.backref('students'))
 
     # profile base attributes
-    firstName = db.Column(db.String(50), nullable=False)
-    lastName = db.Column(db.String(50), nullable=False)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
     year = db.Column(db.Enum(Year), nullable=False)
     major = db.Column(db.String(50), nullable=False)
     minor = db.Column(db.String(50))
-    skills = db.Column(db.String(500))
+    skills = db.Column(db.Text)
     gender = db.Column(db.Enum(Gender), nullable=False)
     gpa = db.Column(db.Float)
-    workStatus = db.Column(db.Enum(WorkStatus))
+    work_status = db.Column(db.Enum(WorkStatus))
     clearance = db.Column(db.Enum(Clearance))
-    searchStatus = db.Column(db.Enum(SearchStatus))
+    search_status = db.Column(db.Enum(SearchStatus))
     phone = db.Column(db.String(10))
 
     # Resume file

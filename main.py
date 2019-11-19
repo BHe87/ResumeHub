@@ -38,9 +38,9 @@ def initdb_command():
 						   minor='LIFE',
 						   gender=Gender.OTHER,
 						   gpa=4.0,
-						   workStatus=WorkStatus.US,
+						   work_status=WorkStatus.US,
 						   clearance=Clearance.NONE,
-						   searchStatus=SearchStatus.OPEN,
+						   search_status=SearchStatus.OPEN,
 						   phone='123456789'))
 
 	# hardcode organization(s)
