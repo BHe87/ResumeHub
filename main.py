@@ -30,47 +30,45 @@ def initdb_command():
 	db.session.add(Student(username='Human',
 						   pw_hash=generate_password_hash('123456'),
 						   email='test@resumehub.com',
+						   description='I am a student',
 						   first_name='Human',
 						   last_name='Namuh',
-						   description='I am a student',
 						   year=Year.SENIOR,
 						   major='CS',
 						   minor='LIFE',
 						   gender=Gender.OTHER,
 						   gpa=4.0,
+						   workStatus=WorkStatus.US,
+						   clearance=Clearance.NONE,
+						   searchStatus=SearchStatus.OPEN,
 						   phone='123456789'))
 
 	# hardcode organization(s)
 	db.session.add(Organization(username='Fresa',
 								pw_hash=generate_password_hash('fresa'),
 								email='Fresa@pitt.edu',
-								first_name='Fresa',
-								last_name='Fresa',
-								description='Dance together!'))
+								description='Dance together!',
+								name='Fresa'))
 	db.session.add(Organization(username='KSA',
 								pw_hash=generate_password_hash('ksa'),
 								email='KSA@pitt.edu',
-								first_name='KSA',
-								last_name='KSA',
-								description='Koreans squads!'))
+								description='Koreans squads!',
+								name='KSA'))
 	db.session.add(Organization(username='ASA',
 								pw_hash=generate_password_hash('asa'),
 								email='ASA@pitt.edu',
-								first_name='ASA',
-								last_name='ASA',
-								description='Asian squads!'))
+								description='Asian squads!',
+								name='ASA'))
 	db.session.add(Organization(username='WiCS',
 								pw_hash=generate_password_hash('wics'),
 								email='WiCS@pitt.edu',
-								first_name='WiCS',
-								last_name='WiCS',
-								description='Women in CS!'))
+								description='Women in CS!',
+								name='WiCS'))
 	db.session.add(Organization(username='GlobalTie',
 								pw_hash=generate_password_hash('globaltie'),
 								email='GlobalTie@pitt.edu',
-								first_name='GlobalTie',
-								last_name='GlobalTie',
-								description='Global Tie!'))
+								description='Global Tie!',
+								name='GlobalTie'))
 	db.session.commit()
 	print('Initialized the database')
 
