@@ -105,6 +105,7 @@ def login():
 		elif not check_password_hash(user.pw_hash, request.form['password']):
 			error = 'Invalid password'
 		else:
+			flash('You are successfully logged in as ' + request.form['username'])
 			session['user_id'] = user.id
 			return redirect(url_for('root'))	
 	return render_template('login.html', error=error)
