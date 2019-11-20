@@ -190,7 +190,7 @@ def register():
 			elif not request.form['GPA']:
 				error = 'Please, enter a GPA'
 			else:
-				print('Your student account was successfully registered!')
+				flash('Your student account was successfully registered!')
 				db.session.add(Student(username=request.form['username'],
 									pw_hash=generate_password_hash(request.form['password']),
 									email=request.form['email'],
@@ -217,7 +217,7 @@ def register():
 			elif not request.form['organizationName']:
 				error = 'Please, enter an organization name'
 			else:
-				print('Your student organization account was successfully registered!')
+				flash('Your student organization account was successfully registered!')
 				db.session.add(Organization(username=request.form['username'],
 									pw_hash=generate_password_hash(request.form['password']),
 									email=request.form['email'],
