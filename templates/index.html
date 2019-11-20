@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+{% block title %} ResumeHub {% endblock %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/student.css') }}">
+{{ super() }}
+{% endblock %}
+
+{% block container %}
+  <div>
+    <p id="student_header" class="black">Affiliated Organizations</p>
+  </div>
+
+  <div class="organizations">
+  {% for org in organizations %}
+    <div class="flex-container organization-box">
+      <div class="info">
+        <p class="name">{{ org.name }}<p>
+        <div class="flex-container">
+          <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+          <p class="stats">{{ org.id }} Students</p>
+        </div>
+      </div>
+      <div class="description">
+        <p>{{ org.description }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
+{% endblock %}
+</html>

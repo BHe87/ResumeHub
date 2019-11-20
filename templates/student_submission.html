@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/student.css') }}">
+{% endblock %}
+{% block container %}
+  <div class="submission-report">
+    {% if result %}
+      <p><span class="primary worked">Successfully</span> submitted profile.</p>
+    {% else %}
+      <p><span class="accent failed">Failed</span> to submit profile.</p>
+    {% endif %}
+    <!-- TODO style button -->
+    <button type="submit" onclick="window.location.href='{{ url_for('profile') }}'">Go back to profile</button>
+  </div
+  ><br>
+{% endblock %}
