@@ -55,6 +55,7 @@
     /* border-width: 5px; */
     border-width: 0.3rem;
     border-radius: 0.35rem;
+    cursor: pointer;
 }
 
 .organization-box .info {
