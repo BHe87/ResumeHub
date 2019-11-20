@@ -93,3 +93,15 @@ body {
   color: red;
   font-size: 25px;
 }
+
+#signin-info {
+  display: none;
+}
+
+#org-signin-info {
+  display: none;
+}
+
+#student-signin-info {
+  display: none;
+}
