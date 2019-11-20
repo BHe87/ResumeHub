@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+  {% block script %}
+  {% endblock %}
+</script>
+
+<head>
+  {% block head %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/fonts.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/colors.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    <title>
+      {% block title %} Resume Hub {% endblock %}
+    </title>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <script>alert("{{ message }}");</script>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}  
+  {% endblock %}
+  
+</head>
+
+<body>
+  <header>
+    <div class="topnav">
+      <a href="/">Home</a>
+      <div class="topnav-right">
+        <a href={{ url_for('profile') }}>Profile</a>
+        <a href={{ url_for('logout') }}>Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    {% block container %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/fonts.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/colors.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/login_base.css') }}">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+      {% endfor %}
+  {% endif %}
+  {% endwith %}
+</head>
+
+<body>
+  <div class="bg-gradient" >
+    <div class="bg-svg">
+      <div class="bump"></div>
+      <div class="logo-svg">
+      </div>
+      <div class="bump"></div>
+      <div class="board">
+        <div class="form">
+          {% if error %}
+          <p class="error" style="color:red"><strong>Error: {{ error }}</strong></p>
+          {% endif %}    
+          <form class="login-form" action="{{ url_for('login') }}" method="POST">
+            Username
+            <input name="username" type="text" placeholder="email address"/>
+            Password
+            <input name="password" type="password" placeholder="password"/>
+            <button class="primary-bg" type="submit">Sign In</button>
+            <p class="message">Not Registered? <a href="{{ url_for('register') }}">Create an Account</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
