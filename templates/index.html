@@ -15,7 +15,7 @@
 
   <div class="organizations">
   {% for org in organizations %}
-    <div class="flex-container organization-box">
+    <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
       <div class="info">
         <p class="name">{{ org.name }}<p>
         <div class="flex-container">

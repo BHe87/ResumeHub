@@ -382,10 +382,12 @@ def download_resume(filename):
 					 mimetype='application/octet-stream')
 
 
-@app.route('/organization')
-def organization():
+@app.route('/organization/<int:id>')
+def organization(id):
 	# if not logged in
 	if not g.user:
 		return redirect(url_for('login'))
+	organization = Organization.query.get(id)
 	
-	return render_template('org.html')
+	return render_template('org.html',
+						   organization=Organization.query.get(id))
