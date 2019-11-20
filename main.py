@@ -77,8 +77,15 @@ def initdb_command():
 @app.before_request
 def before_request():
 	g.user = None
-	if 'user_id' in session:
-		g.user = User.query.get(session['user_id'])
+	if 'user_id' in session and 'role' in session:
+		role = session['role']
+		if role == 'student':
+			g.user = Student.query.get(session['user_id'])
+		elif role == 'organization':
+			g.user = Organization.query.get(session['user_id'])
+		# A user is logged in as Company
+		else:
+			g.user = Company.query.get(session['user_id'])
 
 
 @app.route('/')
@@ -87,17 +94,18 @@ def root():
 	if not g.user:
 		return redirect(url_for('login'))
 	
-	# check here if user in session is student or student org
-	# something like this?
-	# if org user:
-	#	students = Organization.query.get(session['user_id']).students
-	#	companies = Organization.query.get(session['user_id']).companies
-	#	return render_template('indexOrg.html',
-	#							sponsors=companies
-	#							members=students)
-	orgs = Student.query.get(session['user_id']).organizations
+	organizations = None
+	if type(g.user) is Student:
+		organizations = g.user.organizations
+	# will display the own organization info; therefore, no need to assign `organizations`
+	elif type(g.user) is Organization:
+		print('TODO: Do whatever we need here')
+	else:
+		# TODO: assign appropriate organizations 
+		raise NotImplementedError("TODO: Pass different arguments if the current user is Company")
+	
 	return render_template('index.html',
-							organizations=orgs)
+							organizations=organizations) 
 	
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -114,7 +122,17 @@ def login():
 		elif not check_password_hash(user.pw_hash, request.form['password']):
 			error = 'Invalid password'
 		else:
+			# A hacky way to determine if a user is Student, Organization, or Company
+			if Student.query.get(user.id):
+				role = 'student'
+			elif Organization.query.get(user.id):
+				role = 'organization'
+			# A user is registered as Company
+			else:
+				role = 'company'
+			# Store a type of user role (Student, Organization, or Company) as well as user.id
 			session['user_id'] = user.id
+			session['role'] = role
 			return redirect(url_for('root'))	
 	return render_template('login.html', error=error)
 

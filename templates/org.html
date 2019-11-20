@@ -25,7 +25,7 @@
         <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
       </div>
       <div class="description">
-        <p>{{ student.major }}</p>
+        <p>{{ student.year.value + " in " + student.major }}</p>
       </div>
     </div>
     {% endfor %}

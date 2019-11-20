@@ -30,7 +30,9 @@
     <div class="topnav">
       <a href="/">Home</a>
       <div class="topnav-right">
+        {% if session['role'] == 'student' %}
         <a href={{ url_for('profile') }}>Profile</a>
+        {% endif %}
         <a href={{ url_for('logout') }}>Logout</a>
       </div>
     </div>
