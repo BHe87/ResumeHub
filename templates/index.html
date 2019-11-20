@@ -20,7 +20,7 @@
         <p class="name">{{ org.name }}<p>
         <div class="flex-container">
           <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
-          <p class="stats">{{ org.id }} Students</p>
+          <p class="stats">{{org.students|length}} Students</p>
         </div>
       </div>
       <div class="description">
