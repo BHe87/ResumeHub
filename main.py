@@ -186,7 +186,7 @@ def register():
 			elif not request.form['phoneNumber']:
 				error = 'Please, enter a phone number'
 			elif len(request.form['phoneNumber']) != 10:
-				error = 'Please, enter a valid phone number'
+				error = 'Please, enter a 10-digit valid phone number without dash'
 			elif not request.form['GPA']:
 				error = 'Please, enter a GPA'
 			else:
