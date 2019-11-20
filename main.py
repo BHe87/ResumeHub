@@ -87,6 +87,14 @@ def root():
 	if not g.user:
 		return redirect(url_for('login'))
 	
+	# check here if user in session is student or student org
+	# something like this?
+	# if org user:
+	#	students = Organization.query.get(session['user_id']).students
+	#	companies = Organization.query.get(session['user_id']).companies
+	#	return render_template('indexOrg.html',
+	#							sponsors=companies
+	#							members=students)
 	orgs = Student.query.get(session['user_id']).organizations
 	return render_template('index.html',
 							organizations=orgs)
@@ -110,6 +118,7 @@ def login():
 			return redirect(url_for('root'))	
 	return render_template('login.html', error=error)
 
+
 @app.route('/logout')
 def logout():
 	# if already logged in
@@ -122,6 +131,11 @@ def logout():
 	return redirect(url_for('login'))
 
 
+# TODO: check username and email constraints
+# elif User.query.filter_by(username=request.form['username']).first():
+# 	error = request.form['username'] + ' - This username is in use'
+# elif User.query.filter_by(email=request.form['email']).first():
+# 	error = request.form['email'] + ' - This email is in use'
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	# if already logged in
@@ -130,51 +144,76 @@ def register():
 	
 	error = None
 	if request.method == 'POST':
-		if not request.form['username']:
-			error = 'Please, enter a username'
-		elif not request.form['password']:
-			error = 'Please, enter a password'
-		elif request.form['password'] != request.form['password2']:
-			error = 'Passwords do not match!'
-		elif not request.form['firstName']:
-			error = 'Please, enter a first name'
-		elif not request.form['lastName']:
-			error = 'Please, enter a last name'
-		elif not request.form['major']:
-			error = 'Please, enter a major'
-		elif not request.form['minor']:
-			error = 'Please, enter a minor'
-		elif not request.form['phoneNumber']:
-			error = 'Please, enter a phone number'
-		elif len(request.form['phoneNumber']) != 10:
-			error = 'Please, enter a valid phone number'
-		elif not request.form['GPA']:
-			error = 'Please, enter a GPA'	
-		# TODO: check username and email constraints
-		# elif User.query.filter_by(username=request.form['username']).first():
-		# 	error = request.form['username'] + ' - This username is in use'
-		# elif User.query.filter_by(email=request.form['email']).first():
-		# 	error = request.form['email'] + ' - This email is in use'
-		else:
-			print('You were successfully registered!')
-			db.session.add(Student(username=request.form['username'],
-								pw_hash=generate_password_hash(request.form['password']),
-								email=request.form['email'],
-								first_name=request.form['firstName'],
-								last_name=request.form['lastName'],
-								year=request.form['grade'],
-								major=request.form['major'],
-								minor=request.form['minor'],
-								gender=request.form['gender'],
-								gpa=request.form['GPA'],
-								phone=request.form['phoneNumber']))
-			db.session.commit()
-			return redirect(url_for('login'))
+		user_type = request.form['accountType']
+
+		if user_type == 'Student':
+			#assert request.form['username'] == None, 'Please, enter a username'
+
+			if not request.form['username']:
+				error = 'Please, enter a username'
+			elif not request.form['password']:
+				error = 'Please, enter a password'
+			elif request.form['password'] != request.form['password2']:
+				error = 'Passwords do not match!'
+			elif not request.form['email']:
+				error = 'Please, enter an email'
+			elif not request.form['firstName']:
+				error = 'Please, enter a first name'
+			elif not request.form['lastName']:
+				error = 'Please, enter a last name'
+			elif not request.form['major']:
+				error = 'Please, enter a major'
+			elif not request.form['minor']:
+				error = 'Please, enter a minor'
+			elif not request.form['phoneNumber']:
+				error = 'Please, enter a phone number'
+			elif len(request.form['phoneNumber']) != 10:
+				error = 'Please, enter a valid phone number'
+			elif not request.form['GPA']:
+				error = 'Please, enter a GPA'
+			else:
+				print('Your student account was successfully registered!')
+				db.session.add(Student(username=request.form['username'],
+									pw_hash=generate_password_hash(request.form['password']),
+									email=request.form['email'],
+									first_name=request.form['firstName'],
+									last_name=request.form['lastName'],
+									year=request.form['grade'],
+									major=request.form['major'],
+									minor=request.form['minor'],
+									gender=request.form['gender'],
+									gpa=request.form['GPA'],
+									phone=request.form['phoneNumber']))
+				db.session.commit()
+				return redirect(url_for('login'))
+
+		elif user_type == 'Organization':
+			if not request.form['username']:
+				error = 'Please, enter a username'
+			elif not request.form['password']:
+				error = 'Please, enter a password'
+			elif request.form['password'] != request.form['password2']:
+				error = 'Passwords do not match!'
+			elif not request.form['email']:
+				error = 'Please, enter an email'
+			elif not request.form['organizationName']:
+				error = 'Please, enter an organization name'
+			else:
+				print('Your student organization account was successfully registered!')
+				db.session.add(Organization(username=request.form['username'],
+									pw_hash=generate_password_hash(request.form['password']),
+									email=request.form['email'],
+									name=request.form['organizationName']))
+				db.session.commit()
+				return redirect(url_for('login'))
+
+		#elif user_type == 'Company':
+
 	# if request.method == 'GET'
 	return render_template('register.html',
-						   YEAR=Year,
-						   GENDER=Gender,
-						   error=error)
+							YEAR=Year,
+							GENDER=Gender,
+							error=error)
 
 
 @app.route('/profile')
