@@ -40,6 +40,7 @@ class SearchStatus(enum.Enum):
 organizations_and_students = db.Table('organizations_and_students',
                 db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
                 db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True),
+                # I do not think this UniqueConstraint works.. I (Jamie) will keep my TODO in /add_organization
                 db.UniqueConstraint('organization_id', 'student_id', name='student_organization_no_duplicate'))
 
 organizations_and_companies = db.Table('organizations_and_companies',
