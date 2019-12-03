@@ -102,3 +102,4 @@ class Company(User):
     name = db.Column(db.String(100), nullable=False)
     # Andrea: need access code here or no?
     # Andrea: do we have an attribute for the Org that gave permission, or is it just queried?
+    # Jamie: No need to do this neither. Company.organization will be queried as a list of organization affiliated
