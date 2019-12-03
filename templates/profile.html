@@ -11,7 +11,7 @@
 {% block container %}
 <form method="post" action="{{ url_for('add_organization') }}">
     <div class="step step1">
-        <div class="step-title">1. Join Organizations</div>
+        <div class="step-title">1. Request to join Organizations</div>
         <select id="organization" name="organization">
             {% for org in organizations %}
             <option value={{ org.username }}>
