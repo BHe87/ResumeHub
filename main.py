@@ -365,7 +365,7 @@ def add_organization():
 	if organization in current_user.organizations:
 		return redirect(url_for('profile'))
 
-	current_user.organizations.append(organization)
+	current_user.pending_organizations.append(organization)
 	db.session.commit()
 
 	return render_template('student_submission.html', result='true')
@@ -436,9 +436,47 @@ def delete_user(id):
 	user = User.query.get(id)
 	if not user:
 		flash('This user does not exist')
-	else:
-		db.session.delete(user)
-		db.session.commit()
-		flash('The user was successfully deleted')
+	
+	db.session.delete(user)
+	db.session.commit()
+	flash('The user was successfully deleted')
 
 	return redirect(url_for('root'))
+
+
+@app.route('/approve_student_request/<int:id>', methods=['POST'])
+def approve_student_request(id):
+	student = Student.query.get(id)
+	if not student:
+		flash('This student does not exist')
+	
+	# Assume that `g.user` is the organization account to approve this request for easier implementation
+	organization = Organization.query.get(g.user.id)
+	if not organization:
+		flash('This organization does not exist')
+	
+	student.pending_organizations.remove(organization)
+	student.organizations.append(organization)
+	db.session.commit()
+	flash('The student was successfully added to your organization!')
+
+	return redirect(url_for('root'))
+
+
+@app.route('/reject_student_request/<int:id>', methods=['POST'])
+def reject_student_request(id):
+	student = Student.query.get(id)
+	if not student:
+		flash('This student does not exist')
+	
+	# Assume that `g.user` is the organization account to approve this request for easier implementation
+	organization = Organization.query.get(g.user.id)
+	if not organization:
+		flash('This organization does not exist')
+	
+	student.pending_organizations.remove(organization)
+	# TODO: Deliver rejection notification?
+
+	db.session.commit()
+	return redirect(url_for('root'))
+

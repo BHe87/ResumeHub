@@ -48,6 +48,17 @@ organizations_and_companies = db.Table('organizations_and_companies',
                 db.Column('company_id', db.Integer, db.ForeignKey('company.id'), primary_key=True),
                 db.UniqueConstraint('organization_id', 'company_id', name='company_organization_no_duplicate'))
 
+pending_orgs_and_students = db.Table('pending_orgs_and_students',
+                db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True),
+                db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
+                db.UniqueConstraint('organization_id', 'student_id', name='pending_student_organization_no_duplicate'))
+
+pending_orgs_and_companies = db.Table('pending_orgs_and_companies',
+                db.Column('company_id', db.Integer, db.ForeignKey('company.id'), primary_key=True),
+                db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'), primary_key=True),
+                db.UniqueConstraint('organization_id', 'company_id', name='pending_company_organization_no_duplicate'))
+
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -66,6 +77,7 @@ class Admin(User):
 
 class Student(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    pending_organizations = db.relationship('Organization', secondary=pending_orgs_and_students, lazy='subquery', backref=db.backref('pending_students', lazy=True))
     organizations = db.relationship('Organization', secondary=organizations_and_students, backref=db.backref('students'))
 
     # profile base attributes
@@ -108,3 +120,5 @@ class Company(User):
     # Andrea: need access code here or no?
     # Andrea: do we have an attribute for the Org that gave permission, or is it just queried?
     # Jamie: No need to do this neither. Company.organization will be queried as a list of organization affiliated
+
+    pending_organizations = db.relationship('Organization', secondary=pending_orgs_and_companies, lazy='subquery', backref=db.backref('pending_companies', lazy=True))

@@ -4,6 +4,8 @@
 {% block title %} ResumeHub {% endblock %}
 
 {% block head %}
+<!-- Add org.css for now to use same css for pending students -->
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/org.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/student.css') }}">
 {{ super() }}
 {% endblock %}
@@ -42,6 +44,31 @@
     <p>{{ g.user.description }}</p>
   </div>
 </div>
+<p id="student_header" class="black">Pending Students</p>
+{% for student in g.user.pending_students %}
+<div class="flex-container organization-box">
+  <div class="info">
+    <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
+  </div>
+  <div class="description">
+    <p>{{ student.year.value + " in " + student.major }}</p>
+  </div>
+  <form action="{{ url_for('approve_student_request', id=student.id ) }}" method="post"><button type="submit">Approve</button></form>
+  <form action="{{ url_for('reject_student_request', id=student.id ) }}" method="post"><button type="submit">Reject</button></form>
+</div>
+{% endfor %}
+<p id="student_header" class="black">Pending Sponsors</p>
+{% for company in g.user.pending_companies %}
+<div class="flex-container organization-box">
+  <div class="info">
+    <p class="name">{{ company.name }}<p>
+  </div>
+  <div class="description">
+    <p>{{ company.description }}</p>
+  </div>
+</div>
+{% endfor %}
+
 {% else %}
 {% for org in organizations %}
 <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
