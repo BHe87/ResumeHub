@@ -30,6 +30,37 @@
     </div>
     {% endfor %}
   </div>
+<p id="org-header" class="black">Pending Students</p>
+<div class="organizations">
+{% for student in g.user.pending_students %}
+  <div class="flex-container organization-box">
+    <div class="info">
+      <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
+    </div>
+    <div class="description">
+      <p>{{ student.year.value + " in " + student.major }}</p>
+    </div>
+    <form action="{{ url_for('approve_student_request', id=student.id ) }}" method="post"><button type="submit">Approve</button></form>
+    <form action="{{ url_for('reject_student_request', id=student.id ) }}" method="post"><button type="submit">Reject</button></form>
+  </div>
+  {% endfor %}
+</div>
+<p id="org-header" class="black">Pending Sponsors</p>
+<div class="organizations">
+  {% for company in g.user.pending_companies %}
+  <div class="flex-container organization-box">
+    <div class="info">
+      <p class="name">{{ company.name }}<p>
+    </div>
+    <div class="description">
+      <p>{{ company.description }}</p>
+    </div>
+    <form action="{{ url_for('approve_company_request', id=company.id ) }}" method="post"><button type="submit">Approve</button></form>
+    <form action="{{ url_for('reject_company_request', id=company.id ) }}" method="post"><button type="submit">Reject</button></form>
+  </div>
+  {% endfor %}
+</div>
+
 
 {% endblock %}
 </html>
