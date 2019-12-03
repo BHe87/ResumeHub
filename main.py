@@ -70,6 +70,14 @@ def initdb_command():
 								email='GlobalTie@pitt.edu',
 								description='Global Tie!',
 								name='GlobalTie'))
+
+	# Hardcode company(s)
+	db.session.add(Company(username='Google',
+						   pw_hash=generate_password_hash('google'),
+						   email='g@google.com',
+						   description='OH YESSSSS',
+						   name='GOOGLE'))
+
 	db.session.commit()
 	print('Initialized the database')
 
