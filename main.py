@@ -344,13 +344,13 @@ def add_organization():
 		return redirect(url_for('login'))	
 	# save selected organization to the user (student)
 	organization = Organization.query.filter_by(username=request.form['organization']).first()
-	current_student = Student.query.get(session['user_id'])
+	current_user = g.user
 	# check if a student has already joined the organization;
 	# TODO: Remove this, and add UniqueConstraint to `organizations` in model.py in order to handle this properly
-	if organization in current_student.organizations:
+	if organization in current_user.organizations:
 		return redirect(url_for('profile'))
 
-	current_student.organizations.append(organization)
+	current_user.organizations.append(organization)
 	db.session.commit()
 
 	return render_template('student_submission.html', result='true')
