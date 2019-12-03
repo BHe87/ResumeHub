@@ -109,9 +109,7 @@ def root():
 	elif type(g.user) is Organization:
 		print('TODO: Do whatever we need here')
 	else:
-		# TODO: assign appropriate organizations 
-		raise NotImplementedError("TODO: Pass different arguments if the current user is Company")
-	
+		organizations = g.user.organizations
 	return render_template('index.html',
 							organizations=organizations) 
 	
@@ -247,14 +245,13 @@ def profile():
 	# Check if user is not logged in. SKIP FOR NOW
 	if not g.user:
 		return redirect(url_for('login'))
-	current_student = Student.query.get(session['user_id'])
-	
+
 	resume = None
-	if current_student.resume is not None:
-		resume = b64encode(current_student.resume)
+	if session['role'] == 'student' and g.user.resume is not None:
+		resume = b64encode(g.user.resume)
 
 	return render_template('profile.html',
-						   current_student=current_student,
+						   current_student=g.user,
 						   organizations=Organization.query.all(),
 						   YEAR=Year,
 						   GENDER=Gender,

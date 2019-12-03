@@ -26,6 +26,7 @@
         {% endfor %}
     </div>
 </form>
+{% if session['role'] == 'student' %}
     <form method="post" action="{{ url_for('save_resume') }}" enctype="multipart/form-data">
         <div class="step step2">
             <div class="step-title">2. Add Resume (.pdf)</div><br>
@@ -82,5 +83,6 @@
             <input type="submit" class="button save-profile" value="Save Profile"></button>
         </div>
     </form>
+{% endif %}
 {% endblock %}
 </html>
