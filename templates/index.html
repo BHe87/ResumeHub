@@ -9,45 +9,49 @@
 {% endblock %}
 
 {% block container %}
-  <div>
-    {% if session['role'] == 'organization' %}
-    <p id="student_header" class="black">My Organization</p>
-    {% else %}
-    <p id="student_header" class="black">Affiliated Organizations</p>
-    {% endif %}
-  </div>
-
-  <div class="organizations">
-  <!-- if logged in as Organization, display its own organization info -->
+{% if session['role'] == 'admin' %}
+TODO: A list of users here
+{% else %}
+<div>
   {% if session['role'] == 'organization' %}
-  <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=g.user.id) }}';">
-    <div class="info">
-      <p class="name">{{ g.user.name }}<p>
-      <div class="flex-container">
-        <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
-        <p class="stats">{{g.user.students|length}} Students</p>
-      </div>
-    </div>
-    <div class="description">
-      <p>{{ g.user.description }}</p>
-    </div>
-  </div>
+  <p id="student_header" class="black">My Organization</p>
   {% else %}
-  {% for org in organizations %}
-  <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
-    <div class="info">
-      <p class="name">{{ org.name }}<p>
-      <div class="flex-container">
-        <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
-        <p class="stats">{{org.students|length}} Students</p>
-      </div>
-    </div>
-    <div class="description">
-      <p>{{ org.description }}</p>
-    </div>
-  </div>
-  {% endfor %}
+  <p id="student_header" class="black">Affiliated Organizations</p>
   {% endif %}
+</div>
+
+<div class="organizations">
+<!-- if logged in as Organization, display its own organization info -->
+{% if session['role'] == 'organization' %}
+<div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=g.user.id) }}';">
+  <div class="info">
+    <p class="name">{{ g.user.name }}<p>
+    <div class="flex-container">
+      <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+      <p class="stats">{{g.user.students|length}} Students</p>
+    </div>
   </div>
+  <div class="description">
+    <p>{{ g.user.description }}</p>
+  </div>
+</div>
+{% else %}
+{% for org in organizations %}
+<div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
+  <div class="info">
+    <p class="name">{{ org.name }}<p>
+    <div class="flex-container">
+      <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+      <p class="stats">{{org.students|length}} Students</p>
+    </div>
+  </div>
+  <div class="description">
+    <p>{{ org.description }}</p>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+{% endif %}
 {% endblock %}
 </html>

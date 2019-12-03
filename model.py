@@ -59,6 +59,11 @@ class User(db.Model):
     description = db.Column(db.Text)
 
 
+# Admin role model
+class Admin(User):
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+
+
 class Student(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     organizations = db.relationship('Organization', secondary=organizations_and_students, backref=db.backref('students'))

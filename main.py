@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, url_for, g, session, request
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import check_password_hash, generate_password_hash, secure_filename
 
-from model import Company, db, Gender, Organization, Student, User, Year, WorkStatus, Clearance, SearchStatus
+from model import Admin, Company, db, Gender, Organization, Student, User, Year, WorkStatus, Clearance, SearchStatus
 from werkzeug.datastructures import FileStorage
 
 import os, io
@@ -28,6 +28,13 @@ def initdb_command():
 	db.drop_all()
 	db.create_all()
 
+	# Hardcode the admin account
+	db.session.add(Admin(username='admin',
+						 pw_hash=generate_password_hash('admin'),
+						 email='admin@resumehub.com',
+						 description='I am an admin ;)'))
+
+	# Hardcode `Human` student
 	db.session.add(Student(username='Human',
 						   pw_hash=generate_password_hash('123456'),
 						   email='test@resumehub.com',
@@ -91,6 +98,8 @@ def before_request():
 			g.user = Student.query.get(session['user_id'])
 		elif role == 'organization':
 			g.user = Organization.query.get(session['user_id'])
+		elif role == 'admin':
+			g.user = Admin.query.get(session['user_id'])
 		# A user is logged in as Company
 		else:
 			g.user = Company.query.get(session['user_id'])
@@ -107,6 +116,8 @@ def root():
 		organizations = g.user.organizations
 	# will display the own organization info; therefore, no need to assign `organizations`
 	elif type(g.user) is Organization:
+		print('TODO: Do whatever we need here')
+	elif type(g.user) is Admin:
 		print('TODO: Do whatever we need here')
 	else:
 		organizations = g.user.organizations
@@ -133,13 +144,15 @@ def login():
 				role = 'student'
 			elif Organization.query.get(user.id):
 				role = 'organization'
+			elif Admin.query.get(user.id):
+				role = 'admin'
 			# A user is registered as Company
 			else:
 				role = 'company'
 			# Store a type of user role (Student, Organization, or Company) as well as user.id
 			session['user_id'] = user.id
 			session['role'] = role
-			return redirect(url_for('root'))	
+			return redirect(url_for('root'))
 	return render_template('login.html', error=error)
 
 
