@@ -450,6 +450,24 @@ def delete_user(id):
 	return redirect(url_for('root'))
 
 
+@app.route('/delete_company/<int:id>', methods=['POST'])
+def delete_company(id):
+	company = Company.query.get(id)
+	if not company:
+		flash('This company does not exist')
+
+	organization = Organization.query.get(g.user.id)
+	if not organization:
+		flash('This company does not exist')
+
+	# Assume that `g.user` is the organization user who is removing a company
+	organization.companies.remove(company)
+	db.session.commit()
+	flash('The company was successfully deleted')
+
+	return redirect(url_for('root'))
+
+
 # Routes to approve/reject a student or company organization join request
 # Implementing these as separate routes (probably inefficient) due to the time constraint 
 @app.route('/approve_student_request/<int:id>', methods=['POST'])
