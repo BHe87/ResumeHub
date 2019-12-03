@@ -92,6 +92,7 @@ class Organization(User):
 
     name = db.Column(db.String(100), nullable=False)
     # Andrea: how to set up list of Students affiliated? Is this done here or just queried when needed?
+    # Jamie: No need to do ^^ this, Organization.students will query a list of students affiliated
 
 
 class Company(User):
