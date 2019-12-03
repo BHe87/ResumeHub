@@ -462,7 +462,7 @@ def approve_student_request(id):
 	db.session.commit()
 	flash('The student was successfully added to your organization!')
 
-	return redirect(url_for('organization'))
+	return redirect(url_for('organization', id=organization.id))
 
 
 @app.route('/reject_student_request/<int:id>', methods=['POST'])
@@ -480,7 +480,7 @@ def reject_student_request(id):
 	db.session.commit()
 	# TODO: Deliver rejection notification?
 
-	return redirect(url_for('organization'))
+	return redirect(url_for('organization', id=organization.id))
 
 
 @app.route('/approve_company_request/<int:id>', methods=['POST'])
@@ -499,7 +499,7 @@ def approve_company_request(id):
 	db.session.commit()
 	flash('The company was successfully added to your organization!')
 
-	return redirect(url_for('organization'))
+	return redirect(url_for('organization', id=organization.id))
 
 
 @app.route('/reject_company_request/<int:id>', methods=['POST'])
@@ -517,4 +517,4 @@ def reject_company_request(id):
 	db.session.commit()
 	# TODO: Deliver rejection notification?
 
-	return redirect(url_for('organization'))
+	return redirect(url_for('organization', id=organization.id))
