@@ -66,6 +66,8 @@
   <div class="description">
     <p>{{ company.description }}</p>
   </div>
+  <form action="{{ url_for('approve_company_request', id=company.id ) }}" method="post"><button type="submit">Approve</button></form>
+  <form action="{{ url_for('reject_company_request', id=company.id ) }}" method="post"><button type="submit">Reject</button></form>
 </div>
 {% endfor %}
 

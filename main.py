@@ -444,6 +444,8 @@ def delete_user(id):
 	return redirect(url_for('root'))
 
 
+# Routes to approve/reject a student or company organization join request
+# Implementing these as separate routes (probably inefficient) due to the time constraint 
 @app.route('/approve_student_request/<int:id>', methods=['POST'])
 def approve_student_request(id):
 	student = Student.query.get(id)
@@ -475,8 +477,44 @@ def reject_student_request(id):
 		flash('This organization does not exist')
 	
 	student.pending_organizations.remove(organization)
+	db.session.commit()
 	# TODO: Deliver rejection notification?
 
-	db.session.commit()
 	return redirect(url_for('root'))
 
+
+@app.route('/approve_company_request/<int:id>', methods=['POST'])
+def approve_company_request(id):
+	company = Company.query.get(id)
+	if not company:
+		flash('This company does not exist')
+	
+	# Assume that `g.user` is the organization account to approve this request for easier implementation
+	organization = Organization.query.get(g.user.id)
+	if not organization:
+		flash('This organization does not exist')
+	
+	company.pending_organizations.remove(organization)
+	company.organizations.append(organization)
+	db.session.commit()
+	flash('The company was successfully added to your organization!')
+
+	return redirect(url_for('root'))
+
+
+@app.route('/reject_company_request/<int:id>', methods=['POST'])
+def reject_company_request(id):
+	company = Student.query.get(id)
+	if not company:
+		flash('This company does not exist')
+	
+	# Assume that `g.user` is the organization account to approve this request for easier implementation
+	organization = Organization.query.get(g.user.id)
+	if not organization:
+		flash('This organization does not exist')
+	
+	company.pending_organizations.remove(organization)
+	db.session.commit()
+	# TODO: Deliver rejection notification?
+
+	return redirect(url_for('root'))
