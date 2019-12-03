@@ -112,17 +112,19 @@ def root():
 		return redirect(url_for('login'))
 	
 	organizations = None
+	users = None
 	if type(g.user) is Student:
 		organizations = g.user.organizations
 	# will display the own organization info; therefore, no need to assign `organizations`
 	elif type(g.user) is Organization:
 		print('TODO: Do whatever we need here')
 	elif type(g.user) is Admin:
-		print('TODO: Do whatever we need here')
+		users = User.query.all()
 	else:
 		organizations = g.user.organizations
 	return render_template('index.html',
-							organizations=organizations) 
+							organizations=organizations,
+							users=users) 
 	
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -427,3 +429,16 @@ def organization(id):
 	
 	return render_template('org.html',
 						   organization=Organization.query.get(id))
+
+
+@app.route('/delete_user/<int:id>', methods=['POST'])
+def delete_user(id):
+	user = User.query.get(id)
+	if not user:
+		flash('This user does not exist')
+	else:
+		db.session.delete(user)
+		db.session.commit()
+		flash('The user was successfully deleted')
+
+	return redirect(url_for('root'))
