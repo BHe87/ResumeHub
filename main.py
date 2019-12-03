@@ -112,19 +112,25 @@ def root():
 		return redirect(url_for('login'))
 	
 	organizations = None
-	users = None
+	students = None
+	all_organizations = None
+	companies = None
 	if type(g.user) is Student:
 		organizations = g.user.organizations
 	# will display the own organization info; therefore, no need to assign `organizations`
 	elif type(g.user) is Organization:
 		print('TODO: Do whatever we need here')
 	elif type(g.user) is Admin:
-		users = User.query.all()
+		students = Student.query.all()
+		all_organizations = Organization.query.all()
+		companies = Company.query.all()
 	else:
 		organizations = g.user.organizations
 	return render_template('index.html',
 							organizations=organizations,
-							users=users) 
+							students=students,
+							all_organizations=all_organizations,
+							companies=companies) 
 	
 
 @app.route('/login', methods=['GET', 'POST'])

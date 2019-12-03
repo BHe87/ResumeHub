@@ -11,12 +11,29 @@
 {% endblock %}
 
 {% block container %}
+<!-- If logged in as the admin -->
 {% if session['role'] == 'admin' %}
-<div class="user-list">
-  <h3>Registered Users</h3>
+<div class="student-list">
+  <h3>Registered Students</h3>
   <ul>
-    {% for user in users %}
-    <li>{{ user.id }} : {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
+    {% for user in students %}
+    <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="organization-list">
+  <h3>Registered Organizations</h3>
+  <ul>
+    {% for user in all_organizations %}
+    <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
+    {% endfor %}
+  </ul>  
+</div>
+<div class="company-list">
+  <h3>Registered Companies</h3>
+  <ul>
+    {% for user in companies %}
+    <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
     {% endfor %}
   </ul>  
 </div>
