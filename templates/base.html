@@ -30,6 +30,8 @@
     <div class="topnav">
       <a href="/">Home</a>
       <div class="topnav-right">
+        <!-- LOL display username as <a> because I did not care enough to make it with different tag (Lack of front-end implementation)-->
+        <a>Hello, {{ g.user.username }}!</a>
         {% if session['role'] != 'organization' %}
         <a href={{ url_for('profile') }}>Profile</a>
         {% endif %}
