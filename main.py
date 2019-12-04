@@ -198,6 +198,8 @@ def register():
 				error = 'Please, enter a username'
 			elif not request.form['password']:
 				error = 'Please, enter a password'
+			elif not request.form['password2']:
+				error = 'Please, enter a password'
 			elif request.form['password'] != request.form['password2']:
 				error = 'Passwords do not match!'
 			elif not request.form['email']:
@@ -237,22 +239,44 @@ def register():
 				error = 'Please, enter a username'
 			elif not request.form['password']:
 				error = 'Please, enter a password'
+			elif not request.form['password2']:
+				error = 'Please, enter a password'
 			elif request.form['password'] != request.form['password2']:
 				error = 'Passwords do not match!'
 			elif not request.form['email']:
 				error = 'Please, enter an email'
-			elif not request.form['organizationName']:
+			elif not request.form['accountname']:
 				error = 'Please, enter an organization name'
 			else:
 				flash('Your student organization account was successfully registered!')
 				db.session.add(Organization(username=request.form['username'],
 									pw_hash=generate_password_hash(request.form['password']),
 									email=request.form['email'],
-									name=request.form['organizationName']))
+									name=request.form['accountname']))
 				db.session.commit()
 				return redirect(url_for('login'))
 
-		#elif user_type == 'Company':
+		elif user_type == 'Company':
+			if not request.form['username']:
+				error = 'Please, enter a username'
+			elif not request.form['password']:
+				error = 'Please, enter a password'
+			elif not request.form['password2']:
+				error = 'Please, enter a password'
+			elif request.form['password'] != request.form['password2']:
+				error = 'Passwords do not match!'
+			elif not request.form['email']:
+				error = 'Please, enter an email'
+			elif not request.form['accountname']:
+				error = 'Please, enter a company name'
+			else:
+				flash('Your company account was successfully registered!')
+				db.session.add(Company(username=request.form['username'],
+									pw_hash=generate_password_hash(request.form['password']),
+									email=request.form['email'],
+									name=request.form['accountname']))
+				db.session.commit()
+				return redirect(url_for('login'))
 
 	# if request.method == 'GET'
 	return render_template('register.html',

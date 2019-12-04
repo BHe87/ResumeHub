@@ -36,8 +36,12 @@
                 <input type="text" name="email" placeholder="email" required/>
               </div>
               <div id="org-signin-info">
-                Organization Name (if applicable)
-                <input type="text" name="organizationName">
+                Organization Name
+                <input type="text" name="accountname">
+              </div>
+              <div id="org-signin-info">
+                Company Name
+                <input type="text" name="accountname">
               </div>
               <div id="student-signin-info">
                 First Name
@@ -161,6 +165,14 @@
   }
 
   function companyAccount(show) {
+    var orgInfo = document.getElementById("org-signin-info");
+    orgInfo.style.display = "none";
+
+    if (show) {
+      orgInfo.style.display = "block";
+    } else {
+      orgInfo.style.display = "none";
+    }
 
   }
 </script>
