@@ -102,6 +102,10 @@ body {
   display: none;
 }
 
+#company-signin-info {
+  display: none;
+}
+
 #student-signin-info {
   display: none;
 }

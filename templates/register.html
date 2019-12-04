@@ -37,11 +37,11 @@
               </div>
               <div id="org-signin-info">
                 Organization Name
-                <input type="text" name="accountname">
+                <input type="text" name="orgname">
               </div>
-              <div id="org-signin-info">
+              <div id="company-signin-info">
                 Company Name
-                <input type="text" name="accountname">
+                <input type="text" name="companyname">
               </div>
               <div id="student-signin-info">
                 First Name
@@ -124,12 +124,14 @@
     if (type === 'student') {
       // Clear the other account fields
       organizationAccount(false);
+      companyAccount(false);
 
       // Set student fields to visible
       studentAccount(true);
     } else if (type === 'org') {
       // Clear the other account fields
       studentAccount(false);
+      companyAccount(false);
 
       // Set student fields to visible
       organizationAccount(true);
@@ -165,7 +167,7 @@
   }
 
   function companyAccount(show) {
-    var orgInfo = document.getElementById("org-signin-info");
+    var orgInfo = document.getElementById("company-signin-info");
     orgInfo.style.display = "none";
 
     if (show) {

@@ -245,14 +245,14 @@ def register():
 				error = 'Passwords do not match!'
 			elif not request.form['email']:
 				error = 'Please, enter an email'
-			elif not request.form['accountname']:
+			elif not request.form['orgname']:
 				error = 'Please, enter an organization name'
 			else:
 				flash('Your student organization account was successfully registered!')
 				db.session.add(Organization(username=request.form['username'],
 									pw_hash=generate_password_hash(request.form['password']),
 									email=request.form['email'],
-									name=request.form['accountname']))
+									name=request.form['orgname']))
 				db.session.commit()
 				return redirect(url_for('login'))
 
@@ -267,14 +267,14 @@ def register():
 				error = 'Passwords do not match!'
 			elif not request.form['email']:
 				error = 'Please, enter an email'
-			elif not request.form['accountname']:
+			elif not request.form['companyname']:
 				error = 'Please, enter a company name'
 			else:
 				flash('Your company account was successfully registered!')
 				db.session.add(Company(username=request.form['username'],
 									pw_hash=generate_password_hash(request.form['password']),
 									email=request.form['email'],
-									name=request.form['accountname']))
+									name=request.form['companyname']))
 				db.session.commit()
 				return redirect(url_for('login'))
 
