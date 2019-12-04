@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, url_for, g, session, request, abort, flash, make_response, send_file
+from flask import Flask, redirect, render_template, url_for, g, session, request, abort, flash, make_response, send_file, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import check_password_hash, generate_password_hash, secure_filename
 
@@ -49,7 +49,24 @@ def initdb_command():
 						   work_status=WorkStatus.USCITIZEN,
 						   clearance=Clearance.NONE,
 						   search_status=SearchStatus.OPEN,
-						   phone='123456789'))
+						   phone='4128933928'))
+	# Hardcode `Ariana` student
+	db.session.add(Student(username='Ariana',
+						   pw_hash=generate_password_hash('ariana'),
+						   email='ariana@resumehub.com',
+						   description='I am a student in CS',
+						   first_name='ariana',
+						   last_name='grande',
+						   year=Year.JUNIOR,
+						   major='CS',
+						   minor='IS',
+						   gender=Gender.OTHER,
+						   gpa=3.88,
+						   work_status=WorkStatus.USCITIZEN,
+						   clearance=Clearance.NONE,
+						   search_status=SearchStatus.OPEN,
+						   phone='4129339992'))
+
 
 	# hardcode organization(s)
 	db.session.add(Organization(username='Fresa',
@@ -458,9 +475,11 @@ def organization(id):
 	if not g.user:
 		return redirect(url_for('login'))
 	organization = Organization.query.get(id)
-	
+
+	# Probably very inefficient, but 
 	return render_template('org.html',
-						   organization=Organization.query.get(id))
+						   organization=Organization.query.get(id),
+						   student_query=Student.query)
 
 @app.route('/company/<int:id>')
 def company(id):
@@ -583,3 +602,24 @@ def reject_company_request(id):
 @app.route('/help')
 def help():
 	return render_template('help.html')
+
+
+# Get the student profile
+@app.route('/student/<int:id>', methods=['GET'])
+def student(id):
+	student = Student.query.get(id)
+	if not student:
+		flash('This student does not exist')
+	
+	data = {}
+	data['first_name'] = student.first_name
+	data['last_name'] = student.last_name
+	data['year'] = student.year.value
+	data['major'] = student.major
+	data['minor'] = student.minor
+	data['grade'] = student.year.value
+	data['gender'] = student.gender.value
+	data['gpa'] = student.gpa
+	data['phone_number'] = student.phone
+
+	return jsonify(data)
