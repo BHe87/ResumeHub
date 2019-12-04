@@ -173,13 +173,18 @@ function closePopup() {
   </div>
   {% endif %}
 {% else %}
-<div id="search-bar">
+<!-- <div id="search-bar">
   <div class="search-container">
     <div class="field">
-      <p>Filter</p>
+      <p><strong>Filters</strong></p>
     </div>
     <div class="field">
       <p>Year</p>
+      <select name="grade" id="grade">
+          {% for x in YEAR %}
+          <option value={{ x.name }}>{{ x.value }}</option>
+          {% endfor %}
+      </select>
     </div>
     <div class="field">
       <p>Gender</p>
@@ -187,35 +192,33 @@ function closePopup() {
         
       </form>
     </div>
-    <div class="field">
+    <div class="field search-container">
         <p>Has a Work Visa: </p>
         <input type="checkbox" name="hasVisa" value="Bike">
     </div>
     <div>
-      <button onclick="applyFilter()">
-      <p>Apply</p>
-      </button>
+        <form action="{{ url_for('apply_filter'),  }}" method="post"><button type="submit">Approve</button></form>
     </div>
   </div>
-</div>
+</div> -->
   <p id="org-header" class="black">Students</p>
-    {% if organization.students|length > 0 %}
-    <p></p>
-    <div class="organizations">
-      {% for student in organization.students %}
-      <div class="flex-container organization-box" onclick="displayPopup({{student.id}})">
-        <div class="info">
-          <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
-        </div>
-        <div class="description">
-          <p>{{ student.year.value + " in " + student.major }}</p>
-        </div>
+  {% if organization.students|length > 0 %}
+  <p></p>
+  <div class="organizations">
+    {% for student in organization.students %}
+    <div class="flex-container organization-box" onclick="displayPopup({{student.id}})">
+      <div class="info">
+        <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
       </div>
-      {% endfor %}
-      {% else %}
-        <p id="org-header" class="black">No Students D:</p>
-      {% endif %}
+      <div class="description">
+        <p>{{ student.year.value + " in " + student.major }}</p>
+      </div>
     </div>
+    {% endfor %}
+    {% else %}
+      <p id="org-header" class="black">No Students D:</p>
+    {% endif %}
+  </div>
 {% endif %}
 
 {% if session['role'] == 'organization' %}

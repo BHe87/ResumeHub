@@ -417,7 +417,9 @@ def add_organization():
 	current_user.pending_organizations.append(organization)
 	db.session.commit()
 
-	return render_template('student_submission.html', result='true')
+	return render_template('student_submission.html', 
+							result='true', 
+							YEAR=Year)
 
 
 @app.route('/save_resume', methods=['POST'])
@@ -603,6 +605,9 @@ def reject_company_request(id):
 def help():
 	return render_template('help.html')
 
+@app.route('/apply_filter')
+def apply_filter():
+	return redirect(url_for('organization', id=organization.id, stud=organization.students))
 
 # Get the student profile
 @app.route('/student/<int:id>', methods=['GET'])
