@@ -20,6 +20,19 @@
     width: 1.1rem;
 }
 
+#search-bar {
+    min-width: 100%;
+    background-color: #EEE;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .stats-container {
     position: relative;
     display: flex;
@@ -156,4 +169,6 @@
     /* max-height: 30%; */
     overflow: auto;
 }
+
+
 
