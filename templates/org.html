@@ -30,17 +30,23 @@ function closePopup(){
     </div>
     <p id="org-description" class="black">{{ organization.description }}</p>
   </div>
+  <p id="org-header" class="black">Students</p>
+  {% if organization.students|length > 0 %}
+  <p></p>
   <div class="organizations">
-    {% for student in organization.students %}
-    <div class="flex-container organization-box" onclick="displayPopup()">
-      <div class="info">
-        <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
+      {% for student in organization.students %}
+      <div class="flex-container organization-box" onclick="displayPopup()">
+        <div class="info">
+          <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
+        </div>
+        <div class="description">
+          <p>{{ student.year.value + " in " + student.major }}</p>
+        </div>
       </div>
-      <div class="description">
-        <p>{{ student.year.value + " in " + student.major }}</p>
-      </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+      <p id="org-header" class="black">No Students D:</p>
+    {% endif %}
   </div>
   <p id="org-header" class="black">Sponsors</p>
   <p></p>
