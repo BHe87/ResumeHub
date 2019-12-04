@@ -4,12 +4,82 @@
 {% block title %} ResumeHub - Organization {% endblock %}
 
 {% block script %}
-function displayPopup() {
+function loadStudent(id) {
+  var httpRequest = new XMLHttpRequest();
+
+  if (!httpRequest) {
+    alert('Cannot create an XMLHTTP instance :(');
+    return false;
+  }
+
+  httpRequest.onreadystatechange = function() { generateStudentProfile(httpRequest) };
+
+  httpRequest.open("GET", "/student/" + id); 
+  httpRequest.setRequestHeader("Content-Type", "application/json");
+  httpRequest.responseType = "json"
+  httpRequest.send();
+}
+
+
+function generateStudentProfile(httpRequest) {
+  if (httpRequest.readyState === XMLHttpRequest.DONE) {
+    if (httpRequest.status === 200) {
+      let studentProfile = JSON.parse(JSON.stringify(httpRequest.response));
+      let header = document.getElementById("profile-header");
+      header.innerHTML = "";
+      header.appendChild(document.createTextNode(studentProfile['first_name'] + " " + studentProfile['last_name']));
+      
+      let firstName = document.getElementById("first-name");
+      firstName.innerHTML = "";
+      firstName.appendChild(document.createTextNode(studentProfile['first_name']));
+
+      let lastname = document.getElementById("last-name");
+      lastname.innerHTML = "";
+      lastname.appendChild(document.createTextNode(studentProfile['last_name']));
+
+      let major = document.getElementById("major");
+      major.innerHTML = "";
+      major.appendChild(document.createTextNode(studentProfile['major']));
+
+      let minor = document.getElementById("minor");
+      minor.innerHTML = "";
+      minor.appendChild(document.createTextNode(studentProfile['minor']));
+
+      let grade = document.getElementById("grade");
+      grade.innerHTML = "";
+      grade.appendChild(document.createTextNode(studentProfile['grade']));
+
+      let gender = document.getElementById("gender");
+      gender.innerHTML = "";
+      gender.appendChild(document.createTextNode(studentProfile['gender']));
+
+      let gpa = document.getElementById("gpa");
+      gpa.innerHTML = "";
+      gpa.appendChild(document.createTextNode(studentProfile['gpa']));
+
+      let phoneNumber = document.getElementById("phone-number");
+      phoneNumber.innerHTML = "";
+      phoneNumber.appendChild(document.createTextNode(studentProfile['phone_number']));
+    } else {
+      alert("There was a problem with the post request.");
+    }
+  }
+}
+
+function displayPopup(id) {
+  // I (Jamie) would usually re-construct the whole popup using JavaScript,
+  // But, simply replace student's information for now due to the time constraint
+
+  let student_id = parseInt(id, 10);
+
+  // load this student's profile
+  loadStudent(student_id);
+
   let popup = document.getElementById("student-profile");
   popup.style.display = "block";
 }
 
-function closePopup(){
+function closePopup() {
   let popup = document.getElementById("student-profile");
   popup.style.display = "none";
 }
@@ -33,7 +103,7 @@ function closePopup(){
 
   <div class="organizations">
     {% for student in organization.students %}
-    <div class="flex-container organization-box" onclick="displayPopup()">
+    <div class="flex-container organization-box" onclick="displayPopup({{student.id}})">
       <div class="info">
         <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
       </div>
@@ -76,26 +146,32 @@ function closePopup(){
 <!-- Student profile popup -->
 <div class="overlay" id="student-profile">
 	<div class="popup">
-		<h2 id=studnet-name>TODO: Student name</h2>
+		<h2 id=profile-header></h2>
 		<a class="close" onclick="closePopup()">&times;</a>
 		<div class="content">
       <label for="first-name">First Name:</label>
-      <span id="first-name">TODO</span>
+      <span id="first-name"></span>
+      <br>
       <label for="last-name">Last Name:</label>
-      <span id="last-name">TODO</span>
+      <span id="last-name"></span>
       <br>
       <label for="major">Major:</label>
-      <span id="major">TODO</span>
+      <span id="major"></span>
+      <br>
       <label for="minor">Minor:</label>
-      <span id="minor">TODO</span>
+      <span id="minor"></span>
+      <br>
       <label for="grade">Grade:</label>
-      <span id="grade">TODO</span>
+      <span id="grade"></span>
+      <br>
       <label for="gender">Gender:</label>
-      <span id="gender">TODO</span>
+      <span id="gender"></span>
+      <br>
       <label for="gpa">GPA:</label>
-      <span id="gpa">TODO</span>
+      <span id="gpa"></span>
+      <br>
       <label for="phone-number">Phone Number:</label>
-      <span id="phone-number">TODO</span>
+      <span id="phone-number"></span>
 		</div>
 	</div>
 </div>
