@@ -111,3 +111,7 @@ body {
 	width: 400px;
 	margin: 0 auto;
 }
+
+.help {
+	font-size: 25px; 
+}

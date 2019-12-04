@@ -91,6 +91,22 @@
         </div>
       </div>
     {% endfor %}
+      <p id="student_header" class="black">Pending Organizations</p>
+      {% for org in g.user.pending_organizations %}
+        <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
+          <div class="info">
+            <p class="name">{{ org.name }}<p>
+            <div class="flex-container">
+              <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+              <p class="stats">{{org.students|length}} Students</p>
+            </div>
+          </div>
+          <div class="description">
+            <p>{{ org.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
     {% for org in organizations %}
       <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
@@ -106,6 +122,21 @@
         </div>
       </div>
     {% endfor %}
+    <p id="student_header" class="black">Pending Organizations</p>
+      {% for org in g.user.pending_organizations %}
+        <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
+          <div class="info">
+            <p class="name">{{ org.name }}<p>
+            <div class="flex-container">
+              <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+              <p class="stats">{{org.students|length}} Students</p>
+            </div>
+          </div>
+          <div class="description">
+            <p>{{ org.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
   {% endif %}
   </div>
   {% endif %}
