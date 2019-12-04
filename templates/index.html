@@ -13,86 +13,101 @@
 {% block container %}
 <!-- If logged in as the admin -->
 {% if session['role'] == 'admin' %}
-<div class="student-list">
-  <h3>Registered Students</h3>
-  <ul>
-    {% for user in students %}
-    <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
-    {% endfor %}
-  </ul>
-</div>
-<div class="organization-list">
-  <h3>Registered Organizations</h3>
-  <ul>
-    {% for user in all_organizations %}
-    <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
-    {% endfor %}
-  </ul>  
-</div>
-<div class="company-list">
-  <h3>Registered Companies</h3>
-  <ul>
-    {% for user in companies %}
-    <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
-    {% endfor %}
-  </ul>  
-</div>
-{% else %}
-<div>
-  {% if session['role'] == 'organization' %}
-  <p id="student_header" class="black">My Organization</p>
-  {% elif session['role'] == 'company' %}
-  <p id="student_header" class="black">Organizations</p>
-  {% else %}
-  <p id="student_header" class="black">Affiliated Organizations</p>
-  {% endif %}
-</div>
-
-<div class="organizations">
-<!-- if logged in as Organization, display its own organization info -->
-{% if session['role'] == 'organization' %}
-  <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=g.user.id) }}';">
-    <div class="info">
-      <p class="name">{{ g.user.name }}<p>
-      <div class="flex-container">
-        <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
-        <p class="stats">{{g.user.students|length}} Students</p>
-      </div>
-    </div>
-    <div class="description">
-      <p>{{ g.user.description }}</p>
-    </div>
+  <div class="student-list">
+    <h3>Registered Students</h3>
+    <ul>
+      {% for user in students %}
+      <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
+      {% endfor %}
+    </ul>
   </div>
-  <p id="student_header" class="black">Sponsors</p>
-  {% for company in g.user.companies %}
-    <div class="flex-container organization-box">
-      <div class="info">
-        <p class="name">{{ company.name }}<p>
-      </div>
-      <div class="description">
-        <p>{{ company.description }}</p>
-      </div>
-    </div>
-    CAN SOMEONE MAKE THIS BUTTON PRETTY...
-    <form action="{{ url_for('delete_company', id=company.id) }}" method="post"><button type="submit">Delete</button></form>
-  {% endfor %}
+  <div class="organization-list">
+    <h3>Registered Organizations</h3>
+    <ul>
+      {% for user in all_organizations %}
+      <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
+      {% endfor %}
+    </ul>  
+  </div>
+  <div class="company-list">
+    <h3>Registered Companies</h3>
+    <ul>
+      {% for user in companies %}
+      <li>ID: {{ user.id }}, Username: {{ user.username }}<form action="{{ url_for('delete_user', id=user.id) }}" method="post"><button type="submit">Delete</button></form></li>
+      {% endfor %}
+    </ul>  
+  </div>
 {% else %}
-  {% for org in organizations %}
-    <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
+  <div>
+    {% if session['role'] == 'organization' %}
+    <p id="student_header" class="black">My Organization</p>
+    {% elif session['role'] == 'company' %}
+    <p id="student_header" class="black">Organizations</p>
+    {% else %}
+    <p id="student_header" class="black">Affiliated Organizations</p>
+    {% endif %}
+  </div>
+
+  <div class="organizations">
+  <!-- if logged in as Organization, display its own organization info -->
+  {% if session['role'] == 'organization' %}
+    <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=g.user.id) }}';">
       <div class="info">
-        <p class="name">{{ org.name }}<p>
+        <p class="name">{{ g.user.name }}<p>
         <div class="flex-container">
           <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
-          <p class="stats">{{org.students|length}} Students</p>
+          <p class="stats">{{g.user.students|length}} Students</p>
         </div>
       </div>
       <div class="description">
-        <p>{{ org.description }}</p>
+        <p>{{ g.user.description }}</p>
       </div>
     </div>
-  {% endfor %}
-{% endif %}
-</div>
-{% endif %}
+    <p id="student_header" class="black">Sponsors</p>
+    {% for company in g.user.companies %}
+      <div class="flex-container organization-box">
+        <div class="info">
+          <p class="name">{{ company.name }}<p>
+        </div>
+        <div class="description">
+          <p>{{ company.description }}</p>
+        </div>
+      </div>
+      CAN SOMEONE MAKE THIS BUTTON PRETTY...
+      <form action="{{ url_for('delete_company', id=company.id) }}" method="post"><button type="submit">Delete</button></form>
+    {% endfor %}
+  {% elif session['role'] == 'company' %}
+    {% for org in organizations %}
+      <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
+        <div class="info">
+          <p class="name">{{ org.name }}<p>
+          <div class="flex-container">
+            <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+            <p class="stats">{{org.students|length}} Students</p>
+          </div>
+        </div>
+        <div class="description">
+          <p>{{ org.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    {% for org in organizations %}
+      <div class="flex-container organization-box" onclick="location.href='{{ url_for('organization', id=org.id) }}';">
+        <div class="info">
+          <p class="name">{{ org.name }}<p>
+          <div class="flex-container">
+            <img id="org-person" src="{{ url_for('static', filename='svg/person.svg')}}">
+            <p class="stats">{{org.students|length}} Students</p>
+          </div>
+        </div>
+        <div class="description">
+          <p>{{ org.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+  {% endif %}
 {% endblock %}
 </html>
