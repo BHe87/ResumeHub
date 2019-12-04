@@ -9,15 +9,47 @@
 
 {% block container %}
 {% if session['role'] == 'student' %}
-TODO: 'learning mode' for student
+<div class="help">
+	As a Student user you have the power to:
+	<ul>
+	<li>Request to join a student organization</li>
+	<li>Upload your resume to ResumeHub</li>
+	<li>Update your student profile with tidbits about yourself such as:</li>
+		<ul>
+			<li>First Name</li>
+			<li>Last Name</li>
+			<li>Major</li>
+			<li>Minor</li>
+			<li>Grade</li>
+			<li>Gender</li>
+			<li>GPA</li>
+			<li>Phone Number</li>
+		</ul>
+	</ul>
+</div>
 {% elif session['role'] == 'organization' %}
-TODO: 'learning mode' for organization
+<div class="help">
+	As a Student Organization user you have to the power to:
+	<ul>
+	<li>Approve or Reject students to your organization</li>
+	<li>View all members affiliated with your organization</li>
+	<li>View all sponsors of your organization</li>
+	</ul>
+</div>
 {% elif session['role'] == 'company' %}
-TODO: 'learning mode' for comapny
+<div class="help">
+	As a Company user you have to the power to:
+	<ul>
+	<li>Request to sponsor a student organization</li>
+	</ul>
+</div>
+
 {% else %}
 TODO: 'learning mode' for the admin
 we probably will not need this
+
 {% endif %}
 
 {% endblock %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
 </html>
