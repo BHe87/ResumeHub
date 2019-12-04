@@ -3,6 +3,19 @@
 <html>
 {% block title %} ResumeHub - Organization {% endblock %}
 
+{% block script %}
+function displayPopup() {
+  let popup = document.getElementById("student-profile");
+  popup.style.display = "block";
+}
+
+function closePopup(){
+  let popup = document.getElementById("student-profile");
+  popup.style.display = "none";
+}
+
+{% endblock %}
+
 {% block head %}
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/org.css') }}">
 {{ super() }}
@@ -20,7 +33,7 @@
 
   <div class="organizations">
     {% for student in organization.students %}
-    <div class="flex-container organization-box">
+    <div class="flex-container organization-box" onclick="displayPopup()">
       <div class="info">
         <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
       </div>
@@ -60,7 +73,16 @@
   </div>
   {% endfor %}
 </div>
-
+<!-- Student profile popup -->
+<div class="overlay" id="student-profile">
+	<div class="popup">
+		<h2 id=studnet-name>TODO: Student name</h2>
+		<a class="close" onclick="closePopup()">&times;</a>
+		<div class="content">
+			TODO: Student profile
+		</div>
+	</div>
+</div>
 
 {% endblock %}
 </html>
