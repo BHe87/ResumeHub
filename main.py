@@ -124,8 +124,10 @@ def root():
 		students = Student.query.all()
 		all_organizations = Organization.query.all()
 		companies = Company.query.all()
-	else:
+	elif type(g.user) is Company:
 		organizations = g.user.organizations
+	else:
+		print("Error - Who is this ?");
 	return render_template('index.html',
 							organizations=organizations,
 							students=students,
@@ -459,6 +461,16 @@ def organization(id):
 	
 	return render_template('org.html',
 						   organization=Organization.query.get(id))
+
+@app.route('/company/<int:id>')
+def company(id):
+	# if not logged in
+	if not g.user:
+		return redirect(url_for('login'))
+	comp = Company.query.get(id)
+	
+	return render_template('comp.html',
+						   company=comp)
 
 
 @app.route('/delete_user/<int:id>', methods=['POST'])
