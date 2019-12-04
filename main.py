@@ -566,3 +566,8 @@ def reject_company_request(id):
 	# TODO: Deliver rejection notification?
 
 	return redirect(url_for('organization', id=organization.id))
+
+
+@app.route('/help')
+def help():
+	return render_template('help.html')

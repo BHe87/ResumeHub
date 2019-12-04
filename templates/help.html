@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+{% block title %} Help {% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block container %}
+{% if session['role'] == 'student' %}
+TODO: 'learning mode' for student
+{% elif session['role'] == 'organization' %}
+TODO: 'learning mode' for organization
+{% elif session['role'] == 'company' %}
+TODO: 'learning mode' for comapny
+{% else %}
+TODO: 'learning mode' for the admin
+we probably will not need this
+{% endif %}
+
+{% endblock %}
+</html>

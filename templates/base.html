@@ -35,6 +35,7 @@
         {% if session['role'] == 'company' or session['role'] == 'student' %}
         <a href={{ url_for('profile') }}>Profile</a>
         {% endif %}
+        <a href={{ url_for('help') }}>Help</a>
         <a href={{ url_for('logout') }}>Logout</a>
       </div>
     </div>
