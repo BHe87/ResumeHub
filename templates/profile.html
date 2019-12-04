@@ -9,24 +9,42 @@
 {% endblock %}
 
 {% block container %}
-<form method="post" action="{{ url_for('add_organization') }}">
-    <div class="step step1">
-        <div class="step-title">1. Request to join Organizations</div>
-        <select id="organization" name="organization">
-            {% for org in organizations %}
-            <option value={{ org.username }}>
-                {{ org.name }}
-            </option>
+{% if session['role'] == 'company' %}
+    <form method="post" action="{{ url_for('add_organization') }}">
+        <div class="step step1">
+            <div class="step-title">1. Request to join Organizations</div>
+            <select id="organization" name="organization">
+                {% for org in organizations %}
+                <option value={{ org.username }}>
+                    {{ org.name }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button><br>
+            <span>My organizations:</span><br>
+            {% for org in current_student.organizations %}
+            {{ org.name }}
             {% endfor %}
-        </select>
-        <button type="submit">Submit</button><br>
-        <span>My organizations:</span><br>
-        {% for org in current_student.organizations %}
-        {{ org.name }}
-        {% endfor %}
-    </div>
-</form>
-{% if session['role'] == 'student' %}
+        </div>
+    </form>
+{% elif session['role'] == 'student' %}
+    <form method="post" action="{{ url_for('add_organization') }}">
+        <div class="step step1">
+            <div class="step-title">1. Request to join Organizations</div>
+            <select id="organization" name="organization">
+                {% for org in organizations %}
+                <option value={{ org.username }}>
+                    {{ org.name }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button><br>
+            <span>My organizations:</span><br>
+            {% for org in current_student.organizations %}
+            {{ org.name }}
+            {% endfor %}
+        </div>
+    </form>
     <form method="post" action="{{ url_for('save_resume') }}" enctype="multipart/form-data">
         <div class="step step2">
             <div class="step-title">2. Add Resume (.pdf)</div><br>
