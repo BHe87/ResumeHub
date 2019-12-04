@@ -60,6 +60,10 @@ function generateStudentProfile(httpRequest) {
       let phoneNumber = document.getElementById("phone-number");
       phoneNumber.innerHTML = "";
       phoneNumber.appendChild(document.createTextNode(studentProfile['phone_number']));
+      
+      let resume = document.getElementById("resume");
+      resume.href = "/resume/" + studentProfile['id']
+
     } else {
       alert("There was a problem with the post request.");
     }
@@ -221,13 +225,13 @@ function closePopup() {
   </div>
 {% endif %}
 
-{% if session['role'] == 'organization' %}
 <!-- Student profile popup -->
 <div class="overlay" id="student-profile">
 	<div class="popup">
 		<h2 id=profile-header></h2>
 		<a class="close" onclick="closePopup()">&times;</a>
 		<div class="content">
+      <br>
       <label for="first-name">First Name:</label>
       <span id="first-name"></span>
       <br>
@@ -251,10 +255,14 @@ function closePopup() {
       <br>
       <label for="phone-number">Phone Number:</label>
       <span id="phone-number"></span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <a id="resume" href="#">Download Resume</a><br>
 		</div>
 	</div>
 </div>
-{% endif %}
 
 {% endblock %}
 </html>

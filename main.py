@@ -456,16 +456,16 @@ def save_resume():
 	return redirect(url_for('profile'))
 
 
-@app.route('/resume/<filename>')
-def download_resume(filename):
-	res = Student.query.get(session['user_id']).resume
-	filename = Student.query.get(session['user_id']).filename
+@app.route('/resume/<int:id>')
+def download_resume(id):
+	res = Student.query.get(id).resume
+	filename = Student.query.get(id).filename
 	print(filename, flush=True)
 
 	if not res:
 		print("Warn: No resume",flush=True)
-		flash('Your resume does not exist')
-		return redirect(url_for('profile'))
+		flash('This resume does not exist')
+		return redirect(request.referrer)
 	else:
 		return send_file(io.BytesIO(res),
 					 mimetype='application/octet-stream')
@@ -617,6 +617,7 @@ def student(id):
 		flash('This student does not exist')
 	
 	data = {}
+	data['id'] = student.id
 	data['first_name'] = student.first_name
 	data['last_name'] = student.last_name
 	data['year'] = student.year.value
