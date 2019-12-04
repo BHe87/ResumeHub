@@ -113,11 +113,11 @@ function closePopup() {
       <div class="description">
         <p>{{ student.year.value + " in " + student.major }}</p>
       </div>
-      {% endfor %}
+    </div>
+    {% endfor %}
     {% else %}
       <p id="org-header" class="black">No Students D:</p>
     {% endif %}
-    </div>
   </div>
   <p id="org-header" class="black">Sponsors</p>
   <p></p>
@@ -129,8 +129,8 @@ function closePopup() {
           <p class="name">{{ company.name }}<p>
         </div>
         <div class="description">
-            <p>{{ company.description }}</p>
-          </div>
+          <p>{{ company.description }}</p>
+        </div>
       </div>
     {% endfor %}
   {% else %}
@@ -174,7 +174,29 @@ function closePopup() {
   {% endif %}
 {% else %}
 <div id="search-bar">
-  <p>Filter</p>
+  <div class="search-container">
+    <div class="field">
+      <p>Filter</p>
+    </div>
+    <div class="field">
+      <p>Year</p>
+    </div>
+    <div class="field">
+      <p>Gender</p>
+      <form>
+        
+      </form>
+    </div>
+    <div class="field">
+        <p>Has a Work Visa: </p>
+        <input type="checkbox" name="hasVisa" value="Bike">
+    </div>
+    <div>
+      <button onclick="applyFilter()">
+      <p>Apply</p>
+      </button>
+    </div>
+  </div>
 </div>
   <p id="org-header" class="black">Students</p>
     {% if organization.students|length > 0 %}
@@ -188,11 +210,12 @@ function closePopup() {
         <div class="description">
           <p>{{ student.year.value + " in " + student.major }}</p>
         </div>
-        {% endfor %}
+      </div>
+      {% endfor %}
       {% else %}
         <p id="org-header" class="black">No Students D:</p>
       {% endif %}
-  </div>
+    </div>
 {% endif %}
 
 {% if session['role'] == 'organization' %}
