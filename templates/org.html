@@ -63,6 +63,7 @@ function closePopup(){
 
 {% if session['role'] == 'organization' %}
   <p id="org-header" class="black">Pending Students</p>
+  <p></p>
   <div class="organizations">
   {% for student in g.user.pending_students %}
     <div class="flex-container organization-box">
@@ -78,6 +79,7 @@ function closePopup(){
     {% endfor %}
   </div>
   <p id="org-header" class="black">Pending Sponsors</p>
+  <p></p>
   <div class="organizations">
     {% for company in g.user.pending_companies %}
     <div class="flex-container organization-box">
