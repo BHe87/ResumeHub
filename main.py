@@ -389,29 +389,19 @@ def student_submission():
 def add_organization():
 	if not g.user:
 		return redirect(url_for('login'))	
+	# save selected organization to the user (student)
+	organization = Organization.query.filter_by(username=request.form['organization']).first()
+	current_user = g.user
+	# check if a student has already joined the organization;
+	# TODO: Remove this, and add UniqueConstraint to `organizations` in model.py in order to handle this properly
+	if organization in current_user.organizations:
+		return redirect(url_for('profile'))
 
-	if type(g.user) == Student:
-		# save selected organization to the user (student)
-		organization = Organization.query.filter_by(username=request.form['organization']).first()
-		current_user = g.user
-		# check if a student has already joined the organization;
-		# TODO: Remove this, and add UniqueConstraint to `organizations` in model.py in order to handle this properly
-		if organization in current_user.organizations:
-			return redirect(url_for('profile'))
+	current_user.pending_organizations.append(organization)
+	db.session.commit()
 
-		current_user.pending_organizations.append(organization)
-		db.session.commit()
+	return render_template('student_submission.html', result='true')
 
-		return render_template('student_submission.html', result='true')
-	elif type(g.user) == Company:
-		organization = Organization.query.filter_by(username=request.form['organization']).first()
-		current_user = g.user
-
-		if organization in current_user.organizations:
-			return redirect(url_for('profile'))
-
-		organization.companies.append(current_user);
-		db.session.commit()
 
 @app.route('/save_resume', methods=['POST'])
 def save_resume():
