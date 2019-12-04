@@ -60,6 +60,10 @@ function generateStudentProfile(httpRequest) {
       let phoneNumber = document.getElementById("phone-number");
       phoneNumber.innerHTML = "";
       phoneNumber.appendChild(document.createTextNode(studentProfile['phone_number']));
+      
+      let resume = document.getElementById("resume");
+      resume.href = "/resume/" + studentProfile['id']
+
     } else {
       alert("There was a problem with the post request.");
     }
@@ -248,6 +252,8 @@ function closePopup() {
       <br>
       <label for="phone-number">Phone Number:</label>
       <span id="phone-number"></span>
+      <br>
+      <a id="resume" href="#">Download Resume</a><br>
 		</div>
 	</div>
 </div>
