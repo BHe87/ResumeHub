@@ -462,7 +462,7 @@ def download_resume(id):
 
 	if not res:
 		print("Warn: No resume",flush=True)
-		flash('Your resume does not exist')
+		flash('This resume does not exist')
 		return redirect(request.referrer)
 	else:
 		return send_file(io.BytesIO(res),
