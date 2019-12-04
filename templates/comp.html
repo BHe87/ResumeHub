@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+{% block title %} ResumeHub {% endblock %}
+
+{% block head %}
+<!-- Add org.css for now to use same css for pending students -->
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/org.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/student.css') }}">
+{{ super() }}
+{% endblock %}
