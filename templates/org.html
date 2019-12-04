@@ -30,7 +30,6 @@ function closePopup(){
     </div>
     <p id="org-description" class="black">{{ organization.description }}</p>
   </div>
-
   <div class="organizations">
     {% for student in organization.students %}
     <div class="flex-container organization-box" onclick="displayPopup()">
@@ -43,36 +42,58 @@ function closePopup(){
     </div>
     {% endfor %}
   </div>
-<p id="org-header" class="black">Pending Students</p>
-<div class="organizations">
-{% for student in g.user.pending_students %}
-  <div class="flex-container organization-box">
-    <div class="info">
-      <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
-    </div>
-    <div class="description">
-      <p>{{ student.year.value + " in " + student.major }}</p>
-    </div>
-    <form action="{{ url_for('approve_student_request', id=student.id ) }}" method="post"><button type="submit">Approve</button></form>
-    <form action="{{ url_for('reject_student_request', id=student.id ) }}" method="post"><button type="submit">Reject</button></form>
+  <p id="org-header" class="black">Sponsors</p>
+  <p></p>
+  <div class="organizations">
+  {% if organization.companies|length > 0 %}
+    {% for company in organization.companies %}
+      <div class="flex-container organization-box">
+        <div class="info">
+          <p class="name">{{ company.name }}<p>
+        </div>
+        <div class="description">
+            <p>{{ company.description }}</p>
+          </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p id="org-header" class="black">No sponsors :(</p>
+  {% endif %}
   </div>
-  {% endfor %}
-</div>
-<p id="org-header" class="black">Pending Sponsors</p>
-<div class="organizations">
-  {% for company in g.user.pending_companies %}
-  <div class="flex-container organization-box">
-    <div class="info">
-      <p class="name">{{ company.name }}<p>
+
+{% if session['role'] == 'organization' %}
+  <p id="org-header" class="black">Pending Students</p>
+  <div class="organizations">
+  {% for student in g.user.pending_students %}
+    <div class="flex-container organization-box">
+      <div class="info">
+        <p class="name">{{ student.first_name + ' ' + student.last_name }}<p>
+      </div>
+      <div class="description">
+        <p>{{ student.year.value + " in " + student.major }}</p>
+      </div>
+      <form action="{{ url_for('approve_student_request', id=student.id ) }}" method="post"><button type="submit">Approve</button></form>
+      <form action="{{ url_for('reject_student_request', id=student.id ) }}" method="post"><button type="submit">Reject</button></form>
     </div>
-    <div class="description">
-      <p>{{ company.description }}</p>
-    </div>
-    <form action="{{ url_for('approve_company_request', id=company.id ) }}" method="post"><button type="submit">Approve</button></form>
-    <form action="{{ url_for('reject_company_request', id=company.id ) }}" method="post"><button type="submit">Reject</button></form>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
+  <p id="org-header" class="black">Pending Sponsors</p>
+  <div class="organizations">
+    {% for company in g.user.pending_companies %}
+    <div class="flex-container organization-box">
+      <div class="info">
+        <p class="name">{{ company.name }}<p>
+      </div>
+      <div class="description">
+        <p>{{ company.description }}</p>
+      </div>
+      <form action="{{ url_for('approve_company_request', id=company.id ) }}" method="post"><button type="submit">Approve</button></form>
+      <form action="{{ url_for('reject_company_request', id=company.id ) }}" method="post"><button type="submit">Reject</button></form>
+    </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% if session['role'] == 'organization' %}
 <!-- Student profile popup -->
 <div class="overlay" id="student-profile">
 	<div class="popup">
@@ -99,6 +120,7 @@ function closePopup(){
 		</div>
 	</div>
 </div>
+{% endif %}
 
 {% endblock %}
 </html>
